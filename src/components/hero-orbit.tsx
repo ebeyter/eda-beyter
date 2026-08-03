@@ -101,7 +101,7 @@ export function HeroOrbit() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.9, delay: 0.15 + i * 0.1 }}
-          className="absolute bottom-0 left-1/2 rounded-full border border-mauve/25"
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-full border border-mauve/25"
           style={{ width: arc.diameter, height: arc.diameter, animation: `${arc.anim} ${arc.duration}s linear infinite` }}
         />
       ))}

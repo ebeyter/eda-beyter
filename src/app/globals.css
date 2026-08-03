@@ -252,18 +252,18 @@
 
 @keyframes dome-ring-spin {
   from {
-    transform: translateX(-50%) rotate(0deg);
+    transform: translateX(-50%) translateY(50%) rotate(0deg);
   }
   to {
-    transform: translateX(-50%) rotate(360deg);
+    transform: translateX(-50%) translateY(50%) rotate(360deg);
   }
 }
 @keyframes dome-ring-spin-rev {
   from {
-    transform: translateX(-50%) rotate(0deg);
+    transform: translateX(-50%) translateY(50%) rotate(0deg);
   }
   to {
-    transform: translateX(-50%) rotate(-360deg);
+    transform: translateX(-50%) translateY(50%) rotate(-360deg);
   }
 }
 
