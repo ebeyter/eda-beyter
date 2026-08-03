@@ -154,15 +154,27 @@
     scroll-behavior: smooth;
     @apply font-sans;
   }
+  html,
+  body {
+    height: 100%;
+  }
   body {
     @apply bg-background text-foreground;
   }
   h1,
   h2,
   h3 {
-    @apply font-serif;
+    @apply font-serif font-bold;
     text-wrap: balance;
   }
+}
+
+.snap-pages {
+  scroll-snap-type: y mandatory;
+}
+.snap-page {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 @keyframes lane-pulse {

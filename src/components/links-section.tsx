@@ -22,14 +22,14 @@ const ICONS = { LinkedIn: LinkedInIcon, GitHub: GitHubIcon };
 
 export function LinksSection() {
   return (
-    <section id="links" className="py-16">
+    <section id="links" className="bg-crust pb-10 pt-24">
       <div className="mx-auto max-w-230 px-7">
         <Reveal>
-          <div className="mb-7 flex items-baseline gap-4">
-            <span className="whitespace-nowrap font-mono text-[0.72rem] uppercase tracking-[0.08em] text-peach">
+          <div className="mb-7 flex flex-wrap items-baseline gap-4">
+            <span className="whitespace-nowrap font-mono text-[0.8rem] font-bold uppercase tracking-[0.08em] text-pink">
               Bağlantılar
             </span>
-            <h2 className="text-[clamp(1.5rem,3.4vw,2.1rem)] font-medium">
+            <h2 className="bg-gradient-to-r from-pink to-blue bg-clip-text text-[clamp(1.8rem,4vw,2.6rem)] font-extrabold text-transparent">
               Find her elsewhere
             </h2>
           </div>

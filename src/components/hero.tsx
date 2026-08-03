@@ -39,9 +39,9 @@ function RippleCanvas() {
     resize();
 
     const palette = [
-      "203, 166, 247", // mauve
+      "203, 166, 247", // mauve/purple
       "137, 180, 250", // blue
-      "250, 179, 135", // peach
+      "245, 194, 231", // pink
     ];
     const blobs = Array.from({ length: 6 }, (_, i) => ({
       x: Math.random(),
@@ -92,7 +92,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden bg-gradient-to-b from-crust via-base to-base px-0 pb-8 pt-16 text-foreground"
+      className="snap-page relative flex min-h-screen flex-col justify-center overflow-hidden bg-gradient-to-b from-crust via-base to-base px-0 pb-8 pt-16 text-foreground"
     >
       <RippleCanvas />
       <motion.div
@@ -104,14 +104,14 @@ export function Hero() {
         <motion.p
           variants={fadeUp}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-peach"
+          className="text-[0.78rem] font-bold uppercase tracking-[0.16em] text-pink"
         >
           Istanbul, Turkey
         </motion.p>
         <motion.h1
           variants={fadeUp}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mt-3 text-[clamp(3.2rem,10vw,6.4rem)] font-bold text-foreground"
+          className="mt-3 bg-gradient-to-r from-blue via-pink to-mauve bg-clip-text text-[clamp(3.4rem,11vw,7.2rem)] font-extrabold text-transparent"
         >
           Eda Beyter
         </motion.h1>
@@ -123,7 +123,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.2 }}
-          className="-mt-2 text-center font-mono text-[0.8rem] uppercase tracking-[0.1em] text-subtext0"
+          className="-mt-2 text-center font-mono text-[0.85rem] font-bold uppercase tracking-[0.1em] text-mauve"
         >
           Click the icons to get to know me better
         </motion.p>

@@ -20,10 +20,12 @@ export function ContactFooter() {
   return (
     <footer
       id="contact"
-      className="bg-gradient-to-b from-mantle to-crust pb-10 pt-17.5 text-foreground"
+      className="bg-crust pb-10 pt-10 text-foreground"
     >
       <div className="mx-auto max-w-230 px-7">
-        <h2 className="text-[clamp(1.6rem,4vw,2.3rem)] text-foreground">Let&apos;s talk.</h2>
+        <h2 className="bg-gradient-to-r from-mauve to-pink bg-clip-text text-[clamp(2.2rem,5.5vw,3.4rem)] font-extrabold text-transparent">
+          Let&apos;s talk.
+        </h2>
         <p className="max-w-[50ch] text-subtext1">
           Open to conversations on Model UN, early-stage startups, markets, or split times.
         </p>
@@ -72,7 +74,7 @@ export function ContactFooter() {
           </div>
           <button
             type="submit"
-            className="inline-flex w-fit items-center gap-2 rounded-full bg-peach px-5.5 py-3 text-[0.92rem] font-bold text-crust transition-transform hover:-translate-y-0.5"
+            className="inline-flex w-fit items-center gap-2 rounded-full bg-gradient-to-r from-pink to-mauve px-5.5 py-3 text-[0.92rem] font-bold text-crust transition-transform hover:-translate-y-0.5"
           >
             Send message
           </button>

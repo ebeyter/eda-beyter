@@ -12,10 +12,10 @@ export function Reveal({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.55, ease: "easeOut", delay }}
+      initial={{ opacity: 0, y: 50, scale: 0.94 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ type: "spring", stiffness: 140, damping: 16, delay }}
     >
       {children}
     </motion.div>
@@ -24,7 +24,7 @@ export function Reveal({
 
 export function RevealGroup({
   children,
-  stagger = 0.08,
+  stagger = 0.1,
 }: {
   children: ReactNode;
   stagger?: number;
@@ -33,7 +33,7 @@ export function RevealGroup({
     <motion.div
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={{ once: true, amount: 0.2 }}
       variants={{
         hidden: {},
         show: { transition: { staggerChildren: stagger } },
@@ -55,8 +55,13 @@ export function RevealItem({
     <motion.div
       className={className}
       variants={{
-        hidden: { opacity: 0, y: 20 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+        hidden: { opacity: 0, y: 44, scale: 0.94 },
+        show: {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          transition: { type: "spring", stiffness: 140, damping: 16 },
+        },
       }}
     >
       {children}

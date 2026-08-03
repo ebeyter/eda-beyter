@@ -19,7 +19,7 @@ export function SiteNav() {
       initial={{ y: -56, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="sticky top-0 z-50 border-b border-surface1 bg-background/85 backdrop-blur-md"
+      className="fixed inset-x-0 top-0 z-50 border-b border-surface1 bg-background/85 backdrop-blur-md"
     >
       <div className="mx-auto flex max-w-230 items-center justify-between px-7 py-3.5">
         <a href="#top" className="font-serif text-[1.05rem] font-semibold">

@@ -2,8 +2,8 @@ import { nowCards } from "@/lib/data";
 import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
 
 const ACCENTS = [
-  { border: "border-mauve", text: "text-mauve", dot: "bg-mauve" },
-  { border: "border-peach", text: "text-peach", dot: "bg-peach" },
+  { border: "border-blue", text: "text-blue", dot: "bg-blue" },
+  { border: "border-pink", text: "text-pink", dot: "bg-pink" },
 ] as const;
 
 function LiveDot({ className }: { className: string }) {
@@ -17,14 +17,14 @@ function LiveDot({ className }: { className: string }) {
 
 export function NowSection() {
   return (
-    <section id="now" className="py-20">
+    <section id="now" className="snap-page flex min-h-screen flex-col justify-center bg-base py-20">
       <div className="mx-auto max-w-230 px-7">
         <Reveal>
-          <div className="mb-2 flex items-baseline gap-4">
-            <span className="whitespace-nowrap font-mono text-[0.72rem] uppercase tracking-[0.08em] text-peach">
+          <div className="mb-3 flex flex-wrap items-baseline gap-4">
+            <span className="whitespace-nowrap font-mono text-[0.8rem] font-bold uppercase tracking-[0.08em] text-pink">
               Right now
             </span>
-            <h2 className="text-[clamp(1.7rem,3.8vw,2.4rem)] font-semibold">
+            <h2 className="bg-gradient-to-r from-blue to-mauve bg-clip-text text-[clamp(2.2rem,5.5vw,3.6rem)] font-extrabold text-transparent">
               What I&apos;ve been doing
             </h2>
           </div>
@@ -43,7 +43,7 @@ export function NowSection() {
                   className={`rounded-2xl border-l-4 ${accent.border} bg-card p-7 shadow-[0_2px_10px_var(--shadow-color)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_14px_30px_var(--shadow-color)]`}
                 >
                   <div className="flex flex-wrap items-baseline justify-between gap-3">
-                    <h3 className="flex items-center text-[1.15rem] font-semibold">
+                    <h3 className="flex items-center text-[1.3rem] font-bold">
                       <LiveDot className={accent.dot} />
                       {card.org}
                     </h3>
