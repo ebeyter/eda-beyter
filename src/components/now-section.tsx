@@ -17,7 +17,7 @@ function LiveDot({ className }: { className: string }) {
 
 export function NowSection() {
   return (
-    <section id="now" className="snap-page flex min-h-screen flex-col justify-center bg-base py-20">
+    <section id="now" className="snap-page flex min-h-dvh flex-col justify-center bg-base py-20">
       <div className="mx-auto max-w-230 px-7">
         <Reveal>
           <div className="mb-3 flex flex-wrap items-baseline gap-4">
@@ -59,15 +59,6 @@ export function NowSection() {
                       <li key={b}>{b}</li>
                     ))}
                   </ul>
-                  {card.teaser && (
-                    <div className="mt-4.5 flex items-center gap-3.5 rounded-2xl border-[1.5px] border-dashed border-surface2 bg-surface0 px-5.5 py-4.5">
-                      <LiveDot className={accent.dot} />
-                      <p className="m-0 text-[0.94rem] text-muted-foreground">
-                        <strong className="text-foreground">{card.teaser.strong}</strong>
-                        {" — " + card.teaser.rest}
-                      </p>
-                    </div>
-                  )}
                 </RevealItem>
               );
             })}

@@ -92,7 +92,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="snap-page relative flex min-h-screen flex-col justify-center overflow-hidden bg-gradient-to-b from-crust via-base to-base px-0 pb-8 pt-16 text-foreground"
+      className="snap-page relative flex min-h-dvh flex-col justify-center overflow-hidden bg-gradient-to-b from-crust via-base to-base px-0 pb-8 pt-16 text-foreground"
     >
       <RippleCanvas />
       <motion.div

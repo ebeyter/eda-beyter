@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { href: "#top", label: "Orbit" },
   { href: "#about", label: "About" },
   { href: "#now", label: "Now" },
+  { href: "#achievements", label: "Wins" },
   { href: "#contact", label: "Contact" },
 ];
 

@@ -9,7 +9,7 @@ const CHIP_COLORS = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="snap-page flex min-h-screen flex-col justify-center bg-mantle py-20">
+    <section id="about" className="snap-page flex min-h-dvh flex-col justify-center bg-mantle py-20">
       <div className="mx-auto max-w-230 px-7">
         <Reveal>
           <span className="whitespace-nowrap font-mono text-[0.8rem] font-bold uppercase tracking-[0.08em] text-pink">

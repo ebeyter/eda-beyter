@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Eda Beyter",
   description:
-    "Eda Beyter — MUN logistics lead, entrepreneurship club president, and active equity investor.",
+    "Eda Beyter — Model UN logistics lead, entrepreneurship club president, and professional swimmer.",
 };
 
 export default function RootLayout({
