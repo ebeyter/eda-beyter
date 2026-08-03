@@ -12,58 +12,72 @@ import {
 } from "@/components/ui/dialog";
 import { orbitItems, type OrbitItem } from "@/lib/data";
 
-const DECOR_ARCS = [
-  { diameter: "19rem", duration: 22, anim: "dome-ring-spin" },
-  { diameter: "29rem", duration: 32, anim: "dome-ring-spin-rev" },
-  { diameter: "40rem", duration: 46, anim: "dome-ring-spin" },
+const RINGS = [
+  { ring: 1 as const, sizeClass: "h-56 w-56 sm:h-72 sm:w-72", duration: 22, cw: true },
+  { ring: 2 as const, sizeClass: "h-88 w-88 sm:h-112 sm:w-112", duration: 34, cw: false },
 ];
 
-const RING_RADIUS = {
-  1: { radius: "9.5rem", duration: 22, cw: true },
-  2: { radius: "14.5rem", duration: 34, cw: false },
-};
-
-function OrbitNode({
-  item,
+function OrbitRing({
+  sizeClass,
+  duration,
+  cw,
+  items,
   onSelect,
-  delay,
+  delayBase,
 }: {
-  item: OrbitItem;
+  sizeClass: string;
+  duration: number;
+  cw: boolean;
+  items: OrbitItem[];
   onSelect: (item: OrbitItem) => void;
-  delay: number;
+  delayBase: number;
 }) {
-  const ring = RING_RADIUS[item.ring];
-  const spokeStyle = {
-    height: ring.radius,
-    animation: `${ring.cw ? "orbit-cw" : "orbit-ccw"} ${ring.duration}s linear infinite`,
-    "--start-angle": `${item.angle}deg`,
-  } as CSSProperties;
-  const iconStyle = {
-    animation: `${ring.cw ? "orbit-counter-cw" : "orbit-counter-ccw"} ${ring.duration}s linear infinite`,
-    "--counter-offset": `${-item.angle}deg`,
-  } as CSSProperties;
+  const orbitAnim = cw ? "orbit-cw" : "orbit-ccw";
+  const counterAnim = cw ? "orbit-counter-cw" : "orbit-counter-ccw";
 
   return (
-    <div className="absolute bottom-0 left-1/2 origin-bottom" style={spokeStyle}>
-      <motion.button
-        type="button"
-        onClick={() => onSelect(item)}
-        aria-label={`${item.label} — view details`}
-        initial={{ opacity: 0, scale: 0.3 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.55, delay, ease: "backOut" }}
-        className="group absolute left-0 top-0 z-20 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 bg-surface0/90 text-2xl shadow-[0_6px_22px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-transform duration-200 hover:scale-115 active:scale-95 sm:h-18 sm:w-18 sm:text-3xl"
-        style={{ ...iconStyle, borderColor: item.color }}
-      >
-        <span
-          className="absolute inset-0 -z-10 rounded-full opacity-50 blur-lg transition-opacity duration-200 group-hover:opacity-90"
-          style={{ backgroundColor: item.color }}
-          aria-hidden
-        />
-        <span role="img" aria-hidden>
-          {item.emoji}
-        </span>
-      </motion.button>
+    <div
+      className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-full border border-mauve/25 ${sizeClass}`}
+    >
+      {items.map((item, i) => (
+        <div
+          key={item.id}
+          className="absolute left-1/2 top-0 flex h-1/2 origin-bottom flex-col items-center justify-start"
+          style={
+            {
+              marginLeft: "-2rem",
+              animation: `${orbitAnim} ${duration}s linear infinite`,
+              "--start-angle": `${item.angle}deg`,
+            } as CSSProperties
+          }
+        >
+          <motion.button
+            type="button"
+            onClick={() => onSelect(item)}
+            aria-label={`${item.label} — view details`}
+            initial={{ opacity: 0, scale: 0.3 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.55, delay: delayBase + i * 0.13, ease: "backOut" }}
+            className="group relative z-10 -mt-8 flex h-16 w-16 items-center justify-center rounded-full border-2 bg-surface0/90 text-2xl shadow-[0_6px_22px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-transform duration-200 hover:scale-115 active:scale-95"
+            style={
+              {
+                animation: `${counterAnim} ${duration}s linear infinite`,
+                "--counter-offset": `${-item.angle}deg`,
+                borderColor: item.color,
+              } as CSSProperties
+            }
+          >
+            <span
+              className="absolute inset-0 -z-10 rounded-full opacity-50 blur-lg transition-opacity duration-200 group-hover:opacity-90"
+              style={{ backgroundColor: item.color }}
+              aria-hidden
+            />
+            <span role="img" aria-hidden>
+              {item.emoji}
+            </span>
+          </motion.button>
+        </div>
+      ))}
     </div>
   );
 }
@@ -93,30 +107,18 @@ export function HeroOrbit() {
   const [selected, setSelected] = useState<OrbitItem | null>(null);
 
   return (
-    <div className="relative mx-auto h-80 w-full max-w-165 sm:h-104">
-      {DECOR_ARCS.map((arc, i) => (
-        <motion.div
-          key={arc.diameter}
-          aria-hidden
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.9, delay: 0.15 + i * 0.1 }}
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-full border border-mauve/25"
-          style={{ width: arc.diameter, height: arc.diameter, animation: `${arc.anim} ${arc.duration}s linear infinite` }}
-        />
-      ))}
-
+    <div className="relative mx-auto h-52 w-full max-w-165 overflow-hidden sm:h-68">
       <WorldLine />
 
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.1, ease: "easeOut" }}
-        className="absolute bottom-0 left-1/2 z-10 h-68 w-52 -translate-x-1/2 overflow-visible sm:h-84 sm:w-64"
+        className="absolute bottom-0 left-1/2 z-10 h-44 w-34 -translate-x-1/2 translate-y-1/2 sm:h-56 sm:w-44"
       >
         <div
           aria-hidden
-          className="absolute -inset-x-6 bottom-0 h-40 animate-pulse rounded-full bg-gradient-to-r from-blue via-pink to-mauve opacity-40 blur-3xl"
+          className="absolute -inset-x-6 bottom-0 h-32 animate-pulse rounded-full bg-gradient-to-r from-blue via-pink to-mauve opacity-40 blur-3xl"
         />
         <div
           className="relative h-full w-full"
@@ -132,15 +134,23 @@ export function HeroOrbit() {
             alt="Eda Beyter"
             fill
             priority
-            sizes="256px"
+            sizes="176px"
             className="object-cover object-top"
           />
           <div className="absolute inset-0 bg-mauve/10 mix-blend-color" />
         </div>
       </motion.div>
 
-      {orbitItems.map((item, i) => (
-        <OrbitNode key={item.id} item={item} onSelect={setSelected} delay={0.55 + i * 0.13} />
+      {RINGS.map((ring, i) => (
+        <OrbitRing
+          key={ring.ring}
+          sizeClass={ring.sizeClass}
+          duration={ring.duration}
+          cw={ring.cw}
+          items={orbitItems.filter((item) => item.ring === ring.ring)}
+          onSelect={setSelected}
+          delayBase={0.55 + i * 0.26}
+        />
       ))}
 
       <Dialog open={!!selected} onOpenChange={(open) => !open && setSelected(null)}>
