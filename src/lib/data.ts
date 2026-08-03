@@ -135,6 +135,11 @@ export const orbitItems: OrbitItem[] = [
   },
 ];
 
+export const contact = {
+  email: "edabeyter5@gmail.com",
+  location: "Istanbul, Turkey",
+};
+
 export const links = [
   {
     name: "LinkedIn",
@@ -146,9 +151,9 @@ export const links = [
     handle: "ebeyter",
     href: "https://github.com/ebeyter",
   },
+  {
+    name: "Gmail",
+    handle: contact.email,
+    href: `mailto:${contact.email}`,
+  },
 ];
-
-export const contact = {
-  email: "edabeyter5@gmail.com",
-  location: "Istanbul, Turkey",
-};

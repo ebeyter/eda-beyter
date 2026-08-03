@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { bio, contact } from "@/lib/data";
+import { bio } from "@/lib/data";
 import { LinkCards } from "@/components/link-cards";
 
 const fadeUp = { hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0 } };
@@ -128,15 +128,6 @@ export function Hero() {
         <motion.div variants={fadeUp} transition={{ duration: 0.5, ease: "easeOut" }}>
           <LinkCards />
         </motion.div>
-
-        <motion.a
-          variants={fadeUp}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          href={`mailto:${contact.email}`}
-          className="text-[0.95rem] font-semibold text-subtext1 underline decoration-surface2 underline-offset-4 hover:text-mauve"
-        >
-          {contact.email}
-        </motion.a>
 
         <motion.a
           href="#orbit"

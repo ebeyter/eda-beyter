@@ -1,3 +1,4 @@
+import { Mail } from "lucide-react";
 import { links } from "@/lib/data";
 
 function LinkedInIcon() {
@@ -17,19 +18,20 @@ function GitHubIcon() {
   );
 }
 
-const ICONS = { LinkedIn: LinkedInIcon, GitHub: GitHubIcon };
+const ICONS = { LinkedIn: LinkedInIcon, GitHub: GitHubIcon, Gmail: Mail };
 
 export function LinkCards() {
   return (
     <div className="flex flex-wrap items-center justify-center gap-3">
       {links.map((link) => {
         const Icon = ICONS[link.name as keyof typeof ICONS];
+        const isExternal = link.href.startsWith("http");
         return (
           <a
             key={link.name}
             href={link.href}
-            target="_blank"
-            rel="noopener"
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener" : undefined}
             className="flex items-center gap-3 rounded-[2rem] bg-card px-5 py-3.5 shadow-[0_2px_10px_var(--shadow-color)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_14px_30px_var(--shadow-color)]"
           >
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface1 text-mauve [&_svg]:h-4.5 [&_svg]:w-4.5">
