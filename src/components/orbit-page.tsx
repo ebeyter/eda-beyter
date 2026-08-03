@@ -105,26 +105,16 @@ function Portrait() {
       initial={{ opacity: 0, scale: 0.85 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-      className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-36 w-32 -translate-x-1/2 -translate-y-1/2 sm:h-44 sm:w-40"
+      className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-40 w-36 -translate-x-1/2 -translate-y-1/2 sm:h-48 sm:w-44"
     >
-      <div className="relative h-full w-full overflow-hidden">
-        <Image
-          src="/eda-portrait-ai.png"
-          alt="Eda Beyter"
-          fill
-          priority
-          sizes="160px"
-          className="object-cover object-top"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 60% 78% at 50% 38%, transparent 50%, var(--crust) 100%)",
-          }}
-        />
-      </div>
+      <Image
+        src="/eda-portrait-ai.png"
+        alt="Eda Beyter"
+        fill
+        priority
+        sizes="176px"
+        className="object-contain"
+      />
     </motion.div>
   );
 }
@@ -138,9 +128,11 @@ export function OrbitPage() {
       className="snap-page relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-crust py-8"
     >
       <SectionGlow variant="b" />
-      <span className="sr-only">Click the icons to get to know me better</span>
+      <h2 className="relative z-10 mx-auto max-w-[26ch] px-4 text-center font-serif text-[clamp(0.95rem,2.6vw,1.3rem)] font-bold text-mauve">
+        Click the icons to get to know me better
+      </h2>
 
-      <div className="relative z-10 mx-auto h-108 w-full max-w-165 sm:h-132">
+      <div className="relative z-10 mx-auto mt-3 h-100 w-full max-w-165 sm:h-124">
         <OrbitArc arc="inner" onSelect={setSelected} delayBase={0.5} />
         <OrbitArc arc="outer" onSelect={setSelected} delayBase={0.8} />
         <Portrait />
@@ -160,14 +152,11 @@ export function OrbitPage() {
                   </span>
                   <DialogTitle className="text-lg">{selected.label}</DialogTitle>
                 </div>
-                <DialogDescription>{selected.dialog.tagline}</DialogDescription>
               </DialogHeader>
 
-              <ul className="list-disc space-y-1.5 pl-4.5 text-sm text-muted-foreground">
-                {selected.dialog.bullets.map((b) => (
-                  <li key={b}>{b}</li>
-                ))}
-              </ul>
+              <DialogDescription className="text-[0.95rem] leading-relaxed text-foreground">
+                {selected.dialog.body}
+              </DialogDescription>
             </>
           )}
         </DialogContent>

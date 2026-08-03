@@ -10,8 +10,7 @@ export type OrbitItem = {
   arc: "inner" | "outer";
   angle: number;
   dialog: {
-    tagline: string;
-    bullets: string[];
+    body: string;
   };
 };
 
@@ -25,12 +24,7 @@ export const orbitItems: OrbitItem[] = [
     arc: "inner",
     angle: 0,
     dialog: {
-      tagline: "Model UN is where I learned to keep a hundred moving parts calm at once.",
-      bullets: [
-        "Head of Logistics, Accommodation & Finance for MFINUE — matched delegates with host families, ran sponsors and on-site ops.",
-        "Before that: Delegate & Guide (even represented Human Rights Watch in an ECOSOC committee), and before that, Admin on the organizing team.",
-        "Also a delegate at SULTANI MFINUE, the French MUN conferences.",
-      ],
+      body: "Model UN is where I learned to keep a hundred moving parts calm at once. I'm Head of Logistics, Accommodation & Finance for MFINUE — matching delegates with host families, running sponsors, and keeping on-site operations together. Before that I was Delegate & Guide (I even got to represent Human Rights Watch in an ECOSOC committee), and before that, Admin on the organizing team. I've also been a delegate at SULTANI MFINUE, the French MUN conferences.",
     },
   },
   {
@@ -42,12 +36,7 @@ export const orbitItems: OrbitItem[] = [
     arc: "inner",
     angle: 120,
     dialog: {
-      tagline: "Swimming's been my thing since I was little — early mornings, endless laps, still going.",
-      bullets: [
-        "Turkish Champion (Dec 2019) and Turkish National Championships Medalist (Dec 2023).",
-        "Training 35+ hrs/week at the national level, full-time since Nov 2013.",
-        "Also part of the Fenerbahçe Youth Club team since 2022.",
-      ],
+      body: "Swimming's been my thing since I was little — early mornings, endless laps, still going. I'm a Turkish Champion (Dec 2019) and a Turkish National Championships medalist (Dec 2023), training 35+ hours a week at the national level, full-time since Nov 2013. I'm also part of the Fenerbahçe Youth Club team, and have been since 2022.",
     },
   },
   {
@@ -59,12 +48,7 @@ export const orbitItems: OrbitItem[] = [
     arc: "inner",
     angle: 240,
     dialog: {
-      tagline: "School's more than classes for me — I hosted TEDx and lead the Honors Council this year.",
-      bullets: [
-        "Hosted and ran the whole show as TEDx Saint Joseph host.",
-        "High Honors student and Student Council member — this year, Honors Council President.",
-        "DELF B2 and DALF C1 certified in French.",
-      ],
+      body: "School's more than just classes for me. I hosted TEDx Saint Joseph and ran the whole show, and this year I'm Honors Council President — I'm also a High Honors student and Student Council member. On top of that, I'm DELF B2 and DALF C1 certified in French.",
     },
   },
   {
@@ -76,12 +60,7 @@ export const orbitItems: OrbitItem[] = [
     arc: "outer",
     angle: 45,
     dialog: {
-      tagline: "President of the Saint Joseph Entrepreneurship Club since Sep 2024 — building things with people is my favorite kind of chaos.",
-      bullets: [
-        "Organizing SOMMET, our case-study competition: 15+ sponsorships (Carrefour, TEB) worth 300k+ TRY.",
-        "Leading 35+ team members and 300+ participants.",
-        "2x semi-finalist team lead, Gençbizz Start-Up Development Competition.",
-      ],
+      body: "I've been President of the Saint Joseph Entrepreneurship Club since Sep 2024, and building things with people is honestly my favorite kind of chaos. I organize SOMMET, our case-study competition — that's 15+ sponsorships (Carrefour, TEB) worth 300k+ TRY, leading 35+ team members and 300+ participants. We were also 2x semi-finalists, with me as team lead, in the Gençbizz Start-Up Development Competition.",
     },
   },
   {
@@ -93,11 +72,7 @@ export const orbitItems: OrbitItem[] = [
     arc: "outer",
     angle: 135,
     dialog: {
-      tagline: "I like being around people building things, on and off campus.",
-      bullets: [
-        "Founding Member & Community Specialist, forcreate. — helped grow Türkiye's next-gen high school entrepreneurship ecosystem (Jan 2024 — Jan 2025).",
-        "Part of WorkupOnBoard, İş Bankası's high school entrepreneurship program.",
-      ],
+      body: "I like being around people building things, on and off campus. I'm a Founding Member and Community Specialist at forcreate., where I helped grow Türkiye's next-gen high school entrepreneurship ecosystem (Jan 2024 – Jan 2025), and I'm part of WorkupOnBoard, İş Bankası's high school entrepreneurship program.",
     },
   },
   {
@@ -109,11 +84,7 @@ export const orbitItems: OrbitItem[] = [
     arc: "outer",
     angle: 225,
     dialog: {
-      tagline: "I like keeping an eye on markets and how the economy actually works.",
-      bullets: [
-        "HSBC Insight Program — a first real look at investment banking and global finance.",
-        "Genuinely enjoy following markets, not just for school.",
-      ],
+      body: "I like keeping an eye on markets and how the economy actually works. Through the HSBC Insight Program I got a first real look at investment banking and global finance, and I genuinely enjoy following markets — not just for school.",
     },
   },
   {
@@ -125,12 +96,7 @@ export const orbitItems: OrbitItem[] = [
     arc: "outer",
     angle: 315,
     dialog: {
-      tagline: "Outside of everything else: I love to eat, and I'll play pretty much any sport you put in front of me.",
-      bullets: [
-        "Big on food — trying new places, new cuisines, cooking included.",
-        "International volunteer with GSM — helped restore a medieval fortress in Montaigu-le-Blin, France, with volunteers from Italy, Belgium, and Spain (Aug 2025).",
-        "Interests: sports, politics, world history, volunteering, drawing, cooking.",
-      ],
+      body: "Outside of everything else: I love to eat, and I'll play pretty much any sport you put in front of me. I'm big on food — trying new places, new cuisines, cooking included — and this past summer I volunteered internationally with GSM, helping restore a medieval fortress in Montaigu-le-Blin, France, alongside volunteers from Italy, Belgium, and Spain. Sports, politics, world history, volunteering, drawing, cooking — that's pretty much me.",
     },
   },
 ];
