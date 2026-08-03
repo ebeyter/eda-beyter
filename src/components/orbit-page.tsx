@@ -14,8 +14,8 @@ import { orbitItems, type OrbitItem } from "@/lib/data";
 import { SectionGlow } from "@/components/section-glow";
 
 const ARCS = {
-  inner: { sizeClass: "h-56 w-56 sm:h-68 sm:w-68", duration: 26, cw: true },
-  outer: { sizeClass: "h-84 w-84 sm:h-100 sm:w-100", duration: 38, cw: false },
+  inner: { sizeClass: "h-60 w-60 sm:h-76 sm:w-76", duration: 26, cw: true },
+  outer: { sizeClass: "h-88 w-88 sm:h-116 sm:w-116", duration: 38, cw: false },
 };
 
 function OrbitIcon({ item }: { item: OrbitItem }) {
@@ -105,20 +105,24 @@ function Portrait() {
       initial={{ opacity: 0, scale: 0.85 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-      className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-28 w-28 -translate-x-1/2 -translate-y-1/2 sm:h-32 sm:w-32"
+      className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-36 w-32 -translate-x-1/2 -translate-y-1/2 sm:h-44 sm:w-40"
     >
-      <div
-        aria-hidden
-        className="absolute -inset-2 rounded-full bg-gradient-to-r from-blue via-pink to-mauve opacity-25 blur-2xl"
-      />
-      <div className="relative h-full w-full overflow-hidden rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+      <div className="relative h-full w-full overflow-hidden">
         <Image
           src="/eda-portrait-ai.png"
           alt="Eda Beyter"
           fill
           priority
-          sizes="128px"
+          sizes="160px"
           className="object-cover object-top"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 60% 78% at 50% 38%, transparent 50%, var(--crust) 100%)",
+          }}
         />
       </div>
     </motion.div>
@@ -131,16 +135,12 @@ export function OrbitPage() {
   return (
     <section
       id="orbit"
-      className="snap-page relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-crust pb-8 pt-24"
+      className="snap-page relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-crust py-8"
     >
       <SectionGlow variant="b" />
-      <div className="relative z-10 mx-auto px-4 text-center">
-        <h2 className="whitespace-nowrap bg-gradient-to-r from-blue via-pink to-mauve bg-clip-text text-[clamp(1rem,3.4vw,1.9rem)] font-serif font-extrabold text-transparent">
-          Click the icons to get to know me better
-        </h2>
-      </div>
+      <span className="sr-only">Click the icons to get to know me better</span>
 
-      <div className="relative z-10 mx-auto mt-5 h-100 w-full max-w-165 sm:h-116">
+      <div className="relative z-10 mx-auto h-108 w-full max-w-165 sm:h-132">
         <OrbitArc arc="inner" onSelect={setSelected} delayBase={0.5} />
         <OrbitArc arc="outer" onSelect={setSelected} delayBase={0.8} />
         <Portrait />
