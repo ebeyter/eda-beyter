@@ -14,15 +14,15 @@ import { orbitItems, type OrbitItem } from "@/lib/data";
 import { SectionGlow } from "@/components/section-glow";
 
 const ARCS = {
-  inner: { sizeClass: "h-72 w-72 sm:h-88 sm:w-88", duration: 26, cw: true },
-  outer: { sizeClass: "h-104 w-104 sm:h-128 sm:w-128", duration: 38, cw: false },
+  inner: { sizeClass: "h-52 w-52 sm:h-64 sm:w-64", duration: 26, cw: true },
+  outer: { sizeClass: "h-76 w-76 sm:h-92 sm:w-92", duration: 38, cw: false },
 };
 
 function OrbitIcon({ item }: { item: OrbitItem }) {
   if (item.iconType === "image") {
     return (
-      <span className="relative block h-8 w-8 overflow-hidden rounded-full bg-white sm:h-9 sm:w-9">
-        <Image src={item.icon} alt={item.label} fill sizes="36px" className="object-cover" />
+      <span className="relative block h-6.5 w-6.5 overflow-hidden rounded-full bg-white sm:h-7.5 sm:w-7.5">
+        <Image src={item.icon} alt={item.label} fill sizes="30px" className="object-cover" />
       </span>
     );
   }
@@ -57,14 +57,14 @@ function OrbitArc({
           className="absolute left-1/2 top-0 h-1/2 origin-bottom"
           style={
             {
-              marginLeft: "-1.75rem",
+              marginLeft: "-1.5rem",
               animation: `${orbitAnim} ${config.duration}s linear infinite`,
               "--start-angle": `${item.angle}deg`,
             } as CSSProperties
           }
         >
           <div
-            className="-mt-7 flex flex-col items-center sm:-mt-8"
+            className="-mt-6 flex flex-col items-center sm:-mt-7"
             style={
               {
                 animation: `${counterAnim} ${config.duration}s linear infinite`,
@@ -79,7 +79,7 @@ function OrbitArc({
               initial={{ opacity: 0, scale: 0.3 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: delayBase + i * 0.1, ease: "backOut" }}
-              className="group relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-2 bg-surface0/90 text-xl shadow-[0_6px_22px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-transform duration-200 hover:scale-115 active:scale-95 sm:h-16 sm:w-16 sm:text-2xl"
+              className="group relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 bg-surface0/90 text-lg shadow-[0_6px_22px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-transform duration-200 hover:scale-115 active:scale-95 sm:h-14 sm:w-14 sm:text-xl"
               style={{ borderColor: item.color }}
             >
               <span
@@ -105,29 +105,20 @@ function Portrait() {
       initial={{ opacity: 0, scale: 0.85 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-      className="absolute left-1/2 top-1/2 z-10 h-32 w-32 -translate-x-1/2 -translate-y-1/2 sm:h-40 sm:w-40"
+      className="absolute left-1/2 top-1/2 z-10 h-24 w-24 -translate-x-1/2 -translate-y-1/2 sm:h-28 sm:w-28"
     >
       <div
         aria-hidden
-        className="absolute -inset-6 animate-pulse rounded-full bg-gradient-to-r from-blue via-pink to-mauve opacity-40 blur-3xl"
+        className="absolute -inset-5 animate-pulse rounded-full bg-gradient-to-r from-blue via-pink to-mauve opacity-40 blur-3xl"
       />
-      <div className="relative h-full w-full overflow-hidden rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+      <div className="relative h-full w-full overflow-hidden rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
         <Image
-          src="/eda-portrait.jpg"
+          src="/eda-portrait-ai.png"
           alt="Eda Beyter"
           fill
           priority
-          sizes="160px"
+          sizes="112px"
           className="object-cover object-top"
-        />
-        <div className="absolute inset-0 bg-mauve/10 mix-blend-color" aria-hidden />
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 70% 75% at 50% 32%, transparent 45%, var(--crust) 100%)",
-          }}
         />
       </div>
     </motion.div>
@@ -140,16 +131,16 @@ export function OrbitPage() {
   return (
     <section
       id="orbit"
-      className="snap-page relative flex min-h-dvh flex-col justify-center overflow-hidden bg-crust py-16"
+      className="snap-page relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-crust pb-8 pt-24"
     >
       <SectionGlow variant="b" />
       <div className="relative z-10 mx-auto px-7 text-center">
-        <h2 className="mx-auto max-w-[16ch] font-serif text-[clamp(1.6rem,4.2vw,2.6rem)] font-extrabold text-mauve">
+        <h2 className="mx-auto max-w-[24ch] font-serif text-[clamp(1.35rem,3.4vw,2.1rem)] font-extrabold text-mauve">
           Click the icons to get to know me better
         </h2>
       </div>
 
-      <div className="relative z-10 mx-auto mt-6 h-112 w-full max-w-165 sm:h-136">
+      <div className="relative z-10 mx-auto mt-5 h-92 w-full max-w-165 sm:h-108">
         <OrbitArc arc="inner" onSelect={setSelected} delayBase={0.5} />
         <OrbitArc arc="outer" onSelect={setSelected} delayBase={0.8} />
         <Portrait />

@@ -102,7 +102,7 @@ export const orbitItems: OrbitItem[] = [
   },
   {
     id: "economy",
-    label: "Economy",
+    label: "Economics",
     color: "var(--color-yellow)",
     iconType: "emoji",
     icon: "📈",

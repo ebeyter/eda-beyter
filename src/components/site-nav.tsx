@@ -5,7 +5,7 @@ import { Home, Mail, Orbit } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "#top", label: "Intro", icon: Home },
-  { href: "#orbit", label: "Orbit", icon: Orbit },
+  { href: "#orbit", label: "More about me", icon: Orbit },
   { href: "#contact", label: "Contact", icon: Mail },
 ];
 
