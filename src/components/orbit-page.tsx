@@ -14,20 +14,23 @@ import { orbitItems, type OrbitItem } from "@/lib/data";
 import { SectionGlow } from "@/components/section-glow";
 
 const ARCS = {
-  inner: { sizeClass: "h-60 w-60 sm:h-76 sm:w-76", duration: 26, cw: true },
-  outer: { sizeClass: "h-88 w-88 sm:h-116 sm:w-116", duration: 38, cw: false },
+  inner: { sizeClass: "h-44 w-44 sm:h-68 sm:w-68", duration: 26, cw: true },
+  outer: { sizeClass: "h-76 w-76 sm:h-116 sm:w-116", duration: 38, cw: false },
 };
+
+const ICON_SIZE = "h-10 w-10 sm:h-14 sm:w-14";
+const ICON_CENTER = "-mt-5 sm:-mt-7";
 
 function OrbitIcon({ item }: { item: OrbitItem }) {
   if (item.iconType === "image") {
     return (
-      <span className="relative block h-6.5 w-6.5 overflow-hidden rounded-full bg-white sm:h-7.5 sm:w-7.5">
+      <span className="relative block h-5.5 w-5.5 overflow-hidden rounded-full bg-white sm:h-7.5 sm:w-7.5">
         <Image src={item.icon} alt={item.label} fill sizes="30px" className="object-cover" />
       </span>
     );
   }
   return (
-    <span role="img" aria-hidden>
+    <span role="img" aria-hidden className="text-base sm:text-xl">
       {item.icon}
     </span>
   );
@@ -54,17 +57,16 @@ function OrbitArc({
       {items.map((item, i) => (
         <div
           key={item.id}
-          className="pointer-events-auto absolute left-1/2 top-0 h-1/2 origin-bottom"
+          className="pointer-events-auto absolute left-1/2 top-0 h-1/2 w-0 origin-bottom"
           style={
             {
-              marginLeft: "-1.5rem",
               animation: `${orbitAnim} ${config.duration}s linear infinite`,
               "--start-angle": `${item.angle}deg`,
             } as CSSProperties
           }
         >
           <div
-            className="-mt-6 flex flex-col items-center sm:-mt-7"
+            className={`${ICON_CENTER} absolute left-0 top-0 flex flex-col items-center`}
             style={
               {
                 animation: `${counterAnim} ${config.duration}s linear infinite`,
@@ -79,7 +81,7 @@ function OrbitArc({
               initial={{ opacity: 0, scale: 0.3 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: delayBase + i * 0.1, ease: "backOut" }}
-              className="group relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 bg-surface0/90 text-lg shadow-[0_6px_22px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-transform duration-200 hover:scale-115 active:scale-95 sm:h-14 sm:w-14 sm:text-xl"
+              className={`${ICON_SIZE} group relative z-10 flex items-center justify-center rounded-full border-2 bg-surface0/90 shadow-[0_6px_22px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-transform duration-200 hover:scale-115 active:scale-95`}
               style={{ borderColor: item.color }}
             >
               <span
@@ -89,7 +91,7 @@ function OrbitArc({
               />
               <OrbitIcon item={item} />
             </motion.button>
-            <span className="mt-1 whitespace-nowrap text-[0.62rem] font-bold italic uppercase tracking-wide text-subtext0 sm:text-[0.68rem]">
+            <span className="mt-1 whitespace-nowrap text-[0.56rem] font-bold italic uppercase tracking-wide text-subtext0 sm:text-[0.68rem]">
               {item.label}
             </span>
           </div>
@@ -105,14 +107,14 @@ function Portrait() {
       initial={{ opacity: 0, scale: 0.85 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-      className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-40 w-36 -translate-x-1/2 -translate-y-1/2 sm:h-48 sm:w-44"
+      className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-28 w-24 -translate-x-1/2 -translate-y-1/2 sm:h-36 sm:w-32"
     >
       <Image
         src="/eda-portrait-ai.png"
         alt="Eda Beyter"
         fill
         priority
-        sizes="176px"
+        sizes="144px"
         className="object-contain"
       />
     </motion.div>
@@ -125,14 +127,17 @@ export function OrbitPage() {
   return (
     <section
       id="orbit"
-      className="snap-page relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-crust py-8"
+      className="snap-page relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-crust px-2 py-8"
     >
       <SectionGlow variant="b" />
-      <h2 className="relative z-10 mx-auto max-w-[26ch] px-4 text-center font-serif text-[clamp(0.95rem,2.6vw,1.3rem)] font-bold text-mauve">
-        Click the icons to get to know me better
-      </h2>
 
-      <div className="relative z-10 mx-auto mt-3 h-100 w-full max-w-165 sm:h-124">
+      <div className="fixed inset-x-0 top-4 z-40 flex h-11 items-center justify-center px-20 sm:top-6">
+        <h2 className="max-w-[34ch] truncate bg-gradient-to-r from-blue via-pink to-mauve bg-clip-text text-center text-[0.8rem] font-serif font-bold text-transparent sm:text-[0.95rem]">
+          Click the icons to get to know me better
+        </h2>
+      </div>
+
+      <div className="relative z-10 mx-auto mt-10 h-84 w-full max-w-165 sm:mt-4 sm:h-148">
         <OrbitArc arc="inner" onSelect={setSelected} delayBase={0.5} />
         <OrbitArc arc="outer" onSelect={setSelected} delayBase={0.8} />
         <Portrait />

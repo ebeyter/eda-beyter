@@ -235,18 +235,18 @@
 }
 @keyframes orbit-counter-cw {
   from {
-    transform: rotate(var(--counter-offset, 0deg));
+    transform: translateX(-50%) rotate(var(--counter-offset, 0deg));
   }
   to {
-    transform: rotate(calc(var(--counter-offset, 0deg) - 360deg));
+    transform: translateX(-50%) rotate(calc(var(--counter-offset, 0deg) - 360deg));
   }
 }
 @keyframes orbit-counter-ccw {
   from {
-    transform: rotate(var(--counter-offset, 0deg));
+    transform: translateX(-50%) rotate(var(--counter-offset, 0deg));
   }
   to {
-    transform: rotate(calc(var(--counter-offset, 0deg) + 360deg));
+    transform: translateX(-50%) rotate(calc(var(--counter-offset, 0deg) + 360deg));
   }
 }
 
