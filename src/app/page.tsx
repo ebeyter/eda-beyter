@@ -5,7 +5,6 @@ import { Rope } from "@/components/rope";
 import { AboutSection } from "@/components/about-section";
 import { NowSection } from "@/components/now-section";
 import { AchievementsSection } from "@/components/achievements-section";
-import { OrbitFeature } from "@/components/orbit-feature";
 import { LinksSection } from "@/components/links-section";
 import { ContactFooter } from "@/components/contact-footer";
 
@@ -21,8 +20,6 @@ export default function Home() {
       <NowSection />
       <Rope />
       <AchievementsSection />
-      <Rope />
-      <OrbitFeature />
       <Rope />
       <LinksSection />
       <Rope />

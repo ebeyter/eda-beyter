@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
+  { href: "#top", label: "Orbit" },
   { href: "#about", label: "About" },
   { href: "#now", label: "Currently" },
   { href: "#achievements", label: "Achievements" },
-  { href: "#feature", label: "Orbit" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -15,7 +16,12 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-panel-tint bg-background/85 backdrop-blur-md">
+    <motion.nav
+      initial={{ y: -56, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="sticky top-0 z-50 border-b border-panel-tint bg-background/85 backdrop-blur-md"
+    >
       <div className="mx-auto flex max-w-[920px] items-center justify-between px-7 py-3.5">
         <a href="#top" className="font-serif text-[1.05rem] font-semibold">
           Eda Beyter
@@ -49,6 +55,6 @@ export function SiteNav() {
           ))}
         </ul>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

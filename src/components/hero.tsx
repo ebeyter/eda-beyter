@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { roles } from "@/lib/data";
+import { HeroOrbit } from "@/components/hero-orbit";
+
+const fadeUp = { hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0 } };
 
 function RippleCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -119,26 +122,39 @@ export function Hero() {
       className="relative overflow-hidden bg-gradient-to-b from-pool to-ink px-0 pb-21 pt-25 text-foam"
     >
       <RippleCanvas />
-      <div className="relative z-[2] mx-auto max-w-[920px] px-7">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+      <motion.div
+        className="relative z-[2] mx-auto max-w-[920px] px-7"
+        initial="hidden"
+        animate="show"
+        variants={{ hidden: {}, show: { transition: { staggerChildren: 0.09 } } }}
+      >
+        <motion.p
+          variants={fadeUp}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-gold"
         >
-          <p className="text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-gold">
-            Istanbul, Turkey
-          </p>
-          <h1 className="mt-3.5 mb-1.5 text-[clamp(2.6rem,7vw,4.6rem)] font-medium text-white">
-            Eda Beyter
-          </h1>
+          Istanbul, Turkey
+        </motion.p>
+        <motion.h1
+          variants={fadeUp}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="mt-3.5 mb-1.5 text-[clamp(2.6rem,7vw,4.6rem)] font-medium text-white"
+        >
+          Eda Beyter
+        </motion.h1>
+        <motion.div variants={fadeUp} transition={{ duration: 0.5, ease: "easeOut" }}>
           <RoleRotator />
-          <p className="mt-5.5 max-w-[54ch] text-[1.02rem] text-foam-dim">
-            Right now: running delegate logistics for a Model UN conference, leading a
-            35-person entrepreneurship club, and managing her own equity portfolio —
-            all at once, all in progress.
-          </p>
         </motion.div>
-      </div>
+        <motion.p
+          variants={fadeUp}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="mt-5.5 max-w-[54ch] text-[1.02rem] text-foam-dim"
+        >
+          Right now: running delegate logistics for a Model UN conference, leading a
+          35-person entrepreneurship club, and managing her own equity portfolio —
+          all at once, all in progress.
+        </motion.p>
+      </motion.div>
 
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
@@ -192,6 +208,18 @@ export function Hero() {
           />
         </svg>
       </motion.div>
+
+      <div className="relative z-[2] mt-8 sm:mt-2">
+        <HeroOrbit />
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1.1 }}
+          className="-mt-2 text-center font-mono text-[0.76rem] uppercase tracking-[0.1em] text-foam-dim/70"
+        >
+          Tap a lane
+        </motion.p>
+      </div>
     </section>
   );
 }
