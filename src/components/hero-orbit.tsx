@@ -20,7 +20,7 @@ const DECOR_ARCS = [
 
 const RING_RADIUS = {
   1: { radius: "9.5rem", duration: 22, cw: true },
-  2: { radius: "15rem", duration: 34, cw: false },
+  2: { radius: "14.5rem", duration: 34, cw: false },
 };
 
 function OrbitNode({
@@ -115,6 +115,10 @@ export function HeroOrbit() {
         className="absolute bottom-0 left-1/2 z-10 h-68 w-52 -translate-x-1/2 overflow-visible sm:h-84 sm:w-64"
       >
         <div
+          aria-hidden
+          className="absolute -inset-x-6 bottom-0 h-40 animate-pulse rounded-full bg-gradient-to-r from-blue via-pink to-mauve opacity-40 blur-3xl"
+        />
+        <div
           className="relative h-full w-full"
           style={{
             maskImage:
@@ -131,7 +135,7 @@ export function HeroOrbit() {
             sizes="256px"
             className="object-cover object-top"
           />
-          <div className="absolute inset-0 bg-mauve/12 mix-blend-color" />
+          <div className="absolute inset-0 bg-mauve/10 mix-blend-color" />
         </div>
       </motion.div>
 

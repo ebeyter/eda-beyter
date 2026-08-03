@@ -16,21 +16,21 @@ export const about = {
 
 export const nowCards = [
   {
-    org: "MFINUE",
-    when: "Dec 2024 — Apr 2026",
-    role: "Head of Logistics, Accommodation & Finance",
-    bullets: [
-      "300+ delegates, one conference, countless moving pieces.",
-      "Matched international delegates with host families, coordinated sponsors and on-site operations, and helped bring months of planning to life.",
-    ],
-  },
-  {
     org: "Saint Joseph Entrepreneurship Club",
     when: "Sep 2024 — Present",
     role: "President — previously VP & Head of Projects",
     bullets: [
       "Organizing SOMMET, the club's case-study competition: 15+ sponsorships (Carrefour, TEB) worth 300k+ TRY.",
       "Leading 35+ team members and 300+ participants.",
+    ],
+  },
+  {
+    org: "Fenerbahçe SK",
+    when: "Nov 2013 — Present",
+    role: "Professional Swimmer, Full-time",
+    bullets: [
+      "Early mornings, endless laps — training 35+ hrs/week at the national level.",
+      "Also part of the Fenerbahçe Youth Club team since 2022.",
     ],
   },
 ];
@@ -50,8 +50,8 @@ export const achievements = [
   },
   {
     emoji: "🎓",
-    what: "High Honors & Honors Council",
-    blurb: "High Honors student and Honors Council member at Saint Joseph.",
+    what: "Honors Council President",
+    blurb: "High Honors student, Student Council member, and this year's Honors Council President at Saint Joseph.",
     when: "2022 — 2027",
   },
   {
@@ -127,7 +127,7 @@ export const orbitItems: OrbitItem[] = [
     ring: 2,
     angle: 90,
     dialog: {
-      tagline: "MFINUE — Head of Logistics, Accommodation & Finance.",
+      tagline: "MFINUE — led Logistics, Accommodation & Finance (Dec 2024 — Apr 2026).",
       bullets: [
         "Matched international delegates with host families, coordinated sponsors and on-site operations.",
         "Previously Delegate & Guide — represented Human Rights Watch in the ECOSOC committee; before that, Admin on the organizing team.",
