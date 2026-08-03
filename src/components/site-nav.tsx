@@ -5,10 +5,8 @@ import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-  { href: "#top", label: "Orbit" },
-  { href: "#about", label: "About" },
-  { href: "#now", label: "Now" },
-  { href: "#achievements", label: "Wins" },
+  { href: "#top", label: "Intro" },
+  { href: "#orbit", label: "Orbit" },
   { href: "#contact", label: "Contact" },
 ];
 

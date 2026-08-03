@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { HeroOrbit } from "@/components/hero-orbit";
+import { contact } from "@/lib/data";
 
 const fadeUp = { hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0 } };
 
@@ -92,7 +92,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="snap-page relative flex min-h-dvh flex-col justify-center overflow-hidden bg-gradient-to-b from-crust via-base to-base px-0 pb-8 pt-16 text-foreground"
+      className="snap-page relative flex min-h-dvh flex-col justify-center overflow-hidden bg-gradient-to-b from-crust via-base to-base px-0 text-foreground"
     >
       <RippleCanvas />
       <motion.div
@@ -115,19 +115,33 @@ export function Hero() {
         >
           Eda Beyter
         </motion.h1>
-      </motion.div>
-
-      <div className="relative z-[2] mt-2">
-        <HeroOrbit />
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
-          className="mx-auto -mt-1 max-w-[18ch] text-center text-[clamp(1.2rem,3vw,1.7rem)] font-extrabold text-mauve sm:max-w-none"
+        <motion.a
+          variants={fadeUp}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          href={`mailto:${contact.email}`}
+          className="mt-4 inline-block text-[0.95rem] font-semibold text-subtext1 underline decoration-surface2 underline-offset-4 hover:text-mauve"
         >
-          Click the icons to get to know me better
-        </motion.p>
-      </div>
+          {contact.email}
+        </motion.a>
+
+        <motion.a
+          href="#orbit"
+          variants={fadeUp}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          whileHover={{ y: -3 }}
+          whileTap={{ scale: 0.96 }}
+          className="mt-10 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue via-pink to-mauve px-7 py-3.5 text-[1.05rem] font-bold text-crust shadow-[0_10px_30px_rgba(203,166,247,0.35)]"
+        >
+          To discover more, click here
+          <motion.span
+            aria-hidden
+            animate={{ y: [0, 5, 0] }}
+            transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            ↓
+          </motion.span>
+        </motion.a>
+      </motion.div>
     </section>
   );
 }

@@ -1,85 +1,10 @@
-export const about = {
-  greeting: "Hi, I'm Eda.",
-  lines: [
-    "From Saint Joseph.",
-    "Professional swimmer.",
-    "Eager to learn new things.",
-    "Love to eat and travel.",
-  ],
-  interests: ["Sports", "Politics", "World History", "Volunteering", "Drawing", "Cooking"],
-  languages: [
-    { code: "TR", level: "Native" },
-    { code: "EN", level: "Fluent" },
-    { code: "FR", level: "Fluent" },
-  ],
-};
-
-export const nowCards = [
-  {
-    org: "Saint Joseph Entrepreneurship Club",
-    when: "Sep 2024 — Present",
-    role: "President — previously VP & Head of Projects",
-    bullets: [
-      "Organizing SOMMET, the club's case-study competition: 15+ sponsorships (Carrefour, TEB) worth 300k+ TRY.",
-      "Leading 35+ team members and 300+ participants.",
-    ],
-  },
-  {
-    org: "Fenerbahçe SK",
-    when: "Nov 2013 — Present",
-    role: "Professional Swimmer, Full-time",
-    bullets: [
-      "Early mornings, endless laps — training 35+ hrs/week at the national level.",
-      "Also part of the Fenerbahçe Youth Club team since 2022.",
-    ],
-  },
-];
-
-export const achievements = [
-  {
-    emoji: "🏆",
-    what: "Turkish Champion",
-    blurb: "National title in swimming with Fenerbahçe SK.",
-    when: "Dec 2019",
-  },
-  {
-    emoji: "🥈",
-    what: "Championship Medalist",
-    blurb: "Medaled again at the Turkish National Championships.",
-    when: "Dec 2023",
-  },
-  {
-    emoji: "🎓",
-    what: "Honors Council President",
-    blurb: "High Honors student, Student Council member, and this year's Honors Council President at Saint Joseph.",
-    when: "2022 — 2027",
-  },
-  {
-    emoji: "🗣️",
-    what: "DELF B2 & DALF C1",
-    blurb: "French language certifications from France Éducation international.",
-    when: "2025 · 2026",
-  },
-  {
-    emoji: "🌱",
-    what: "Founding Member, forcreate.",
-    blurb: "Community Specialist — helped grow Türkiye's next-gen high school entrepreneurship ecosystem.",
-    when: "Jan 2024 — Jan 2025",
-  },
-  {
-    emoji: "🏰",
-    what: "Restoration Workcamp",
-    blurb: "International volunteer with GSM — helped restore a medieval fortress in Montaigu-le-Blin, France, alongside volunteers from Italy, Belgium, and Spain.",
-    when: "Aug 2025",
-  },
-];
-
 export type OrbitItem = {
   id: string;
   label: string;
   color: string;
-  emoji: string;
-  ring: 1 | 2;
+  iconType: "emoji" | "image";
+  icon: string;
+  arc: "inner" | "outer";
   angle: number;
   dialog: {
     tagline: string;
@@ -89,65 +14,119 @@ export type OrbitItem = {
 
 export const orbitItems: OrbitItem[] = [
   {
+    id: "mfinue",
+    label: "MFINUE",
+    color: "var(--color-mauve)",
+    iconType: "emoji",
+    icon: "🌍",
+    arc: "inner",
+    angle: -60,
+    dialog: {
+      tagline: "Model UN is where I learned to keep a hundred moving parts calm at once.",
+      bullets: [
+        "Head of Logistics, Accommodation & Finance for MFINUE — matched delegates with host families, ran sponsors and on-site ops.",
+        "Before that: Delegate & Guide (even represented Human Rights Watch in an ECOSOC committee), and before that, Admin on the organizing team.",
+        "Also a delegate at SULTANI MFINUE, the French MUN conferences.",
+      ],
+    },
+  },
+  {
     id: "swimming",
-    label: "Swimming",
-    color: "var(--color-sky)",
-    emoji: "🏊‍♀️",
-    ring: 1,
+    label: "Fenerbahçe SK",
+    color: "var(--color-blue)",
+    iconType: "image",
+    icon: "/fenerbahce-logo.png",
+    arc: "inner",
     angle: 0,
     dialog: {
-      tagline: "Professional swimmer at Fenerbahçe SK since Nov 2013 — early mornings, endless laps.",
+      tagline: "Swimming's been my thing since I was little — early mornings, endless laps, still going.",
       bullets: [
-        "Turkish Champion — Dec 2019",
-        "Turkish National Championships Medalist — Dec 2023",
-        "35+ hrs/week training, still going",
+        "Turkish Champion (Dec 2019) and Turkish National Championships Medalist (Dec 2023).",
+        "Training 35+ hrs/week at the national level, full-time since Nov 2013.",
+        "Also part of the Fenerbahçe Youth Club team since 2022.",
       ],
     },
   },
   {
-    id: "volunteering",
-    label: "Volunteering",
-    color: "var(--color-green)",
-    emoji: "🤝",
-    ring: 1,
-    angle: 180,
+    id: "saintjoseph",
+    label: "Saint Joseph",
+    color: "var(--color-pink)",
+    iconType: "emoji",
+    icon: "🎓",
+    arc: "inner",
+    angle: 60,
     dialog: {
-      tagline: "Community-building, on and off campus.",
+      tagline: "School's more than classes for me — I hosted TEDx and lead the Honors Council this year.",
       bullets: [
-        "Founding Member & Community Specialist, forcreate. — grew Türkiye's next-gen high school entrepreneurship ecosystem (Jan 2024 — Jan 2025).",
-        "International volunteer with GSM — restored a medieval fortress in Montaigu-le-Blin, France, with volunteers from Italy, Belgium, and Spain (Aug 2025).",
+        "Hosted and ran the whole show as TEDx Saint Joseph host.",
+        "High Honors student and Student Council member — this year, Honors Council President.",
+        "DELF B2 and DALF C1 certified in French.",
       ],
     },
   },
   {
-    id: "mun",
-    label: "Model UN",
-    color: "var(--color-mauve)",
-    emoji: "🌍",
-    ring: 2,
-    angle: 90,
-    dialog: {
-      tagline: "MFINUE — led Logistics, Accommodation & Finance (Dec 2024 — Apr 2026).",
-      bullets: [
-        "Matched international delegates with host families, coordinated sponsors and on-site operations.",
-        "Previously Delegate & Guide — represented Human Rights Watch in the ECOSOC committee; before that, Admin on the organizing team.",
-        "Also a delegate at SULTANI MFINUE (French MUN conferences).",
-      ],
-    },
-  },
-  {
-    id: "building",
+    id: "entrepreneurship",
     label: "Entrepreneurship Club",
     color: "var(--color-peach)",
-    emoji: "🚀",
-    ring: 2,
-    angle: 270,
+    iconType: "image",
+    icon: "/entrepreneurship-logo.png",
+    arc: "outer",
+    angle: -90,
     dialog: {
-      tagline: "President of the Saint Joseph Entrepreneurship Club, since Sep 2024.",
+      tagline: "President of the Saint Joseph Entrepreneurship Club since Sep 2024 — building things with people is my favorite kind of chaos.",
       bullets: [
-        "Organizing SOMMET: 15+ sponsorships (Carrefour, TEB) worth 300k+ TRY.",
+        "Organizing SOMMET, our case-study competition: 15+ sponsorships (Carrefour, TEB) worth 300k+ TRY.",
         "Leading 35+ team members and 300+ participants.",
         "2x semi-finalist team lead, Gençbizz Start-Up Development Competition.",
+      ],
+    },
+  },
+  {
+    id: "startups",
+    label: "Start-up World",
+    color: "var(--color-green)",
+    iconType: "emoji",
+    icon: "🌱",
+    arc: "outer",
+    angle: -30,
+    dialog: {
+      tagline: "I like being around people building things, on and off campus.",
+      bullets: [
+        "Founding Member & Community Specialist, forcreate. — helped grow Türkiye's next-gen high school entrepreneurship ecosystem (Jan 2024 — Jan 2025).",
+        "Part of WorkupOnBoard, İş Bankası's high school entrepreneurship program.",
+      ],
+    },
+  },
+  {
+    id: "economy",
+    label: "Economy",
+    color: "var(--color-yellow)",
+    iconType: "emoji",
+    icon: "📈",
+    arc: "outer",
+    angle: 30,
+    dialog: {
+      tagline: "I like keeping an eye on markets and how the economy actually works.",
+      bullets: [
+        "HSBC Insight Program — a first real look at investment banking and global finance.",
+        "Genuinely enjoy following markets, not just for school.",
+      ],
+    },
+  },
+  {
+    id: "lifestyle",
+    label: "Healthy Living",
+    color: "var(--color-red)",
+    iconType: "emoji",
+    icon: "🍽️",
+    arc: "outer",
+    angle: 90,
+    dialog: {
+      tagline: "Outside of everything else: I love to eat, and I'll play pretty much any sport you put in front of me.",
+      bullets: [
+        "Big on food — trying new places, new cuisines, cooking included.",
+        "International volunteer with GSM — helped restore a medieval fortress in Montaigu-le-Blin, France, with volunteers from Italy, Belgium, and Spain (Aug 2025).",
+        "Interests: sports, politics, world history, volunteering, drawing, cooking.",
       ],
     },
   },

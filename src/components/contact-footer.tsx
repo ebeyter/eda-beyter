@@ -27,7 +27,7 @@ export function ContactFooter() {
           Let&apos;s talk.
         </h2>
         <p className="max-w-[50ch] text-[0.92rem] text-subtext1">
-          Open to conversations on Model UN, early-stage startups, or split times.
+          Open to conversations about brilliant ideas, sports and markets.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-4 grid max-w-130 gap-2.5">

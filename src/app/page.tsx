@@ -1,8 +1,6 @@
 import { SiteNav } from "@/components/site-nav";
 import { Hero } from "@/components/hero";
-import { AboutSection } from "@/components/about-section";
-import { NowSection } from "@/components/now-section";
-import { AchievementsSection } from "@/components/achievements-section";
+import { OrbitPage } from "@/components/orbit-page";
 import { LinksSection } from "@/components/links-section";
 import { ContactFooter } from "@/components/contact-footer";
 
@@ -12,9 +10,7 @@ export default function Home() {
       <SiteNav />
       <div className="snap-pages h-dvh overflow-y-auto overflow-x-hidden">
         <Hero />
-        <AboutSection />
-        <NowSection />
-        <AchievementsSection />
+        <OrbitPage />
         <div className="snap-page flex min-h-dvh flex-col justify-center">
           <LinksSection />
           <ContactFooter />
