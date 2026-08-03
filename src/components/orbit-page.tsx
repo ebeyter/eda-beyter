@@ -13,13 +13,22 @@ import {
 import { orbitItems, type OrbitItem } from "@/lib/data";
 import { SectionGlow } from "@/components/section-glow";
 
-const ARCS = {
-  inner: { sizeClass: "h-44 w-44 sm:h-68 sm:w-68", duration: 26, cw: true },
-  outer: { sizeClass: "h-76 w-76 sm:h-116 sm:w-116", duration: 38, cw: false },
+const RINGS = {
+  inner: {
+    ringClass: "h-44 w-44 sm:h-68 sm:w-68",
+    radiusClass: "[--radius:5.5rem] sm:[--radius:8.5rem]",
+    duration: 26,
+    cw: true,
+  },
+  outer: {
+    ringClass: "h-76 w-76 sm:h-116 sm:w-116",
+    radiusClass: "[--radius:9.5rem] sm:[--radius:14.5rem]",
+    duration: 38,
+    cw: false,
+  },
 };
 
 const ICON_SIZE = "h-10 w-10 sm:h-14 sm:w-14";
-const ICON_CENTER = "-mt-5 sm:-mt-7";
 
 function OrbitIcon({ item }: { item: OrbitItem }) {
   if (item.iconType === "image") {
@@ -36,68 +45,59 @@ function OrbitIcon({ item }: { item: OrbitItem }) {
   );
 }
 
-function OrbitArc({
-  arc,
+function OrbitNode({
+  item,
   onSelect,
-  delayBase,
+  delay,
 }: {
-  arc: "inner" | "outer";
+  item: OrbitItem;
   onSelect: (item: OrbitItem) => void;
-  delayBase: number;
+  delay: number;
 }) {
-  const config = ARCS[arc];
-  const items = orbitItems.filter((item) => item.arc === arc);
-  const orbitAnim = config.cw ? "orbit-cw" : "orbit-ccw";
-  const counterAnim = config.cw ? "orbit-counter-cw" : "orbit-counter-ccw";
+  const ring = RINGS[item.arc];
+  const anim = ring.cw ? "orbit-item-cw" : "orbit-item-ccw";
 
   return (
     <div
-      className={`pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-mauve/20 ${config.sizeClass}`}
+      className={`pointer-events-none absolute left-1/2 top-1/2 h-0 w-0 ${ring.radiusClass}`}
+      style={
+        {
+          animation: `${anim} ${ring.duration}s linear infinite`,
+          "--start-angle": `${item.angle}deg`,
+        } as CSSProperties
+      }
     >
-      {items.map((item, i) => (
-        <div
-          key={item.id}
-          className="pointer-events-auto absolute left-1/2 top-0 h-1/2 w-0 origin-bottom"
-          style={
-            {
-              animation: `${orbitAnim} ${config.duration}s linear infinite`,
-              "--start-angle": `${item.angle}deg`,
-            } as CSSProperties
-          }
-        >
-          <div
-            className={`${ICON_CENTER} absolute left-0 top-0 flex flex-col items-center`}
-            style={
-              {
-                animation: `${counterAnim} ${config.duration}s linear infinite`,
-                "--counter-offset": `${-item.angle}deg`,
-              } as CSSProperties
-            }
-          >
-            <motion.button
-              type="button"
-              onClick={() => onSelect(item)}
-              aria-label={`${item.label} — view details`}
-              initial={{ opacity: 0, scale: 0.3 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: delayBase + i * 0.1, ease: "backOut" }}
-              className={`${ICON_SIZE} group relative z-10 flex items-center justify-center rounded-full border-2 bg-surface0/90 shadow-[0_6px_22px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-transform duration-200 hover:scale-115 active:scale-95`}
-              style={{ borderColor: item.color }}
-            >
-              <span
-                className="absolute inset-0 -z-10 rounded-full opacity-50 blur-lg transition-opacity duration-200 group-hover:opacity-90"
-                style={{ backgroundColor: item.color }}
-                aria-hidden
-              />
-              <OrbitIcon item={item} />
-            </motion.button>
-            <span className="mt-1 whitespace-nowrap text-[0.56rem] font-bold italic uppercase tracking-wide text-subtext0 sm:text-[0.68rem]">
-              {item.label}
-            </span>
-          </div>
-        </div>
-      ))}
+      <motion.button
+        type="button"
+        onClick={() => onSelect(item)}
+        aria-label={`${item.label} — view details`}
+        initial={{ opacity: 0, scale: 0.3 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay, ease: "backOut" }}
+        className={`${ICON_SIZE} group pointer-events-auto absolute left-0 top-0 z-10 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border-2 bg-surface0/90 shadow-[0_6px_22px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-transform duration-200 hover:scale-115 active:scale-95`}
+        style={{ borderColor: item.color }}
+      >
+        <span
+          className="absolute inset-0 -z-10 rounded-full opacity-50 blur-lg transition-opacity duration-200 group-hover:opacity-90"
+          style={{ backgroundColor: item.color }}
+          aria-hidden
+        />
+        <OrbitIcon item={item} />
+      </motion.button>
+      <span className="pointer-events-none absolute left-0 top-[1.6rem] -translate-x-1/2 whitespace-nowrap text-[0.56rem] font-bold italic uppercase tracking-wide text-subtext0 sm:top-[2.2rem] sm:text-[0.68rem]">
+        {item.label}
+      </span>
     </div>
+  );
+}
+
+function DecorRing({ ring }: { ring: "inner" | "outer" }) {
+  const config = RINGS[ring];
+  return (
+    <div
+      aria-hidden
+      className={`pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-mauve/20 ${config.ringClass}`}
+    />
   );
 }
 
@@ -138,8 +138,11 @@ export function OrbitPage() {
       </div>
 
       <div className="relative z-10 mx-auto mt-10 h-84 w-full max-w-165 sm:mt-4 sm:h-148">
-        <OrbitArc arc="inner" onSelect={setSelected} delayBase={0.5} />
-        <OrbitArc arc="outer" onSelect={setSelected} delayBase={0.8} />
+        <DecorRing ring="inner" />
+        <DecorRing ring="outer" />
+        {orbitItems.map((item, i) => (
+          <OrbitNode key={item.id} item={item} onSelect={setSelected} delay={0.5 + i * 0.08} />
+        ))}
         <Portrait />
       </div>
 

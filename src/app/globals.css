@@ -250,6 +250,27 @@
   }
 }
 
+@keyframes orbit-item-cw {
+  from {
+    transform: translate(-50%, -50%) rotate(var(--start-angle))
+      translateY(calc(-1 * var(--radius))) rotate(calc(-1 * var(--start-angle)));
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(calc(var(--start-angle) + 360deg))
+      translateY(calc(-1 * var(--radius))) rotate(calc(-1 * var(--start-angle) - 360deg));
+  }
+}
+@keyframes orbit-item-ccw {
+  from {
+    transform: translate(-50%, -50%) rotate(var(--start-angle))
+      translateY(calc(-1 * var(--radius))) rotate(calc(-1 * var(--start-angle)));
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(calc(var(--start-angle) - 360deg))
+      translateY(calc(-1 * var(--radius))) rotate(calc(-1 * var(--start-angle) + 360deg));
+  }
+}
+
 @keyframes dome-ring-spin {
   from {
     transform: translateX(-50%) translateY(50%) rotate(0deg);
