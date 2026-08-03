@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { contact } from "@/lib/data";
+import { bio, contact } from "@/lib/data";
+import { LinkCards } from "@/components/link-cards";
 
 const fadeUp = { hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0 } };
 
@@ -96,7 +97,7 @@ export function Hero() {
     >
       <RippleCanvas />
       <motion.div
-        className="relative z-[2] mx-auto max-w-230 px-7 text-center"
+        className="relative z-[2] mx-auto flex max-w-230 flex-col items-center gap-5 px-7 text-center"
         initial="hidden"
         animate="show"
         variants={{ hidden: {}, show: { transition: { staggerChildren: 0.09 } } }}
@@ -111,15 +112,28 @@ export function Hero() {
         <motion.h1
           variants={fadeUp}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mt-3 bg-gradient-to-r from-blue via-pink to-mauve bg-clip-text text-[clamp(3.4rem,11vw,7.2rem)] font-extrabold text-transparent"
+          className="bg-gradient-to-r from-blue via-pink to-mauve bg-clip-text text-[clamp(3.4rem,11vw,7.2rem)] font-extrabold text-transparent"
         >
           Eda Beyter
         </motion.h1>
+
+        <motion.p
+          variants={fadeUp}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="max-w-[46ch] text-[1.02rem] text-subtext1"
+        >
+          {bio}
+        </motion.p>
+
+        <motion.div variants={fadeUp} transition={{ duration: 0.5, ease: "easeOut" }}>
+          <LinkCards />
+        </motion.div>
+
         <motion.a
           variants={fadeUp}
           transition={{ duration: 0.5, ease: "easeOut" }}
           href={`mailto:${contact.email}`}
-          className="mt-4 inline-block text-[0.95rem] font-semibold text-subtext1 underline decoration-surface2 underline-offset-4 hover:text-mauve"
+          className="text-[0.95rem] font-semibold text-subtext1 underline decoration-surface2 underline-offset-4 hover:text-mauve"
         >
           {contact.email}
         </motion.a>
@@ -130,7 +144,7 @@ export function Hero() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           whileHover={{ y: -3 }}
           whileTap={{ scale: 0.96 }}
-          className="mt-10 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue via-pink to-mauve px-7 py-3.5 text-[1.05rem] font-bold text-crust shadow-[0_10px_30px_rgba(203,166,247,0.35)]"
+          className="mt-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue via-pink to-mauve px-7 py-3.5 text-[1.05rem] font-bold text-crust shadow-[0_10px_30px_rgba(203,166,247,0.35)]"
         >
           To discover more, click here
           <motion.span

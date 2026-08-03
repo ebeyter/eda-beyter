@@ -1,3 +1,6 @@
+export const bio =
+  "Hi, I'm Eda. I'm starting my senior year at Saint Joseph French High School and swimming professionally for Fenerbahçe — I'll try pretty much any sport you put in front of me. Always excited for something new, and just as happy baking good food as eating it.";
+
 export type OrbitItem = {
   id: string;
   label: string;

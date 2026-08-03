@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { contact } from "@/lib/data";
+import { SectionGlow } from "@/components/section-glow";
 
 export function ContactFooter() {
   const [name, setName] = useState("");
@@ -20,9 +21,10 @@ export function ContactFooter() {
   return (
     <footer
       id="contact"
-      className="bg-crust pb-6 pt-6 text-foreground"
+      className="snap-page relative flex min-h-dvh flex-col justify-center overflow-hidden bg-crust py-16 text-foreground"
     >
-      <div className="mx-auto max-w-230 px-7">
+      <SectionGlow variant="a" />
+      <div className="relative z-10 mx-auto max-w-230 px-7">
         <h2 className="bg-gradient-to-r from-mauve to-pink bg-clip-text text-[clamp(1.7rem,4vw,2.4rem)] font-extrabold text-transparent">
           Let&apos;s talk.
         </h2>
