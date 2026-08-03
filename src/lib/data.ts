@@ -101,6 +101,45 @@ export const orbitItems: OrbitItem[] = [
   },
 ];
 
+export const achievements = [
+  {
+    emoji: "🏆",
+    what: "Turkish Champion",
+    blurb: "National title in swimming with Fenerbahçe SK.",
+    when: "Dec 2019",
+  },
+  {
+    emoji: "🥈",
+    what: "Championship Medalist",
+    blurb: "Medaled again at the Turkish National Championships.",
+    when: "Dec 2023",
+  },
+  {
+    emoji: "🎓",
+    what: "Honors Council President",
+    blurb: "High Honors student, Student Council member, and this year's Honors Council President at Saint Joseph.",
+    when: "2022 — 2027",
+  },
+  {
+    emoji: "🗣️",
+    what: "DELF B2 & DALF C1",
+    blurb: "French language certifications from France Éducation international.",
+    when: "2025 · 2026",
+  },
+  {
+    emoji: "🌱",
+    what: "Founding Member, forcreate.",
+    blurb: "Community Specialist — helped grow Türkiye's next-gen high school entrepreneurship ecosystem.",
+    when: "Jan 2024 — Jan 2025",
+  },
+  {
+    emoji: "🏰",
+    what: "Restoration Workcamp",
+    blurb: "International volunteer with GSM — helped restore a medieval fortress in Montaigu-le-Blin, France, alongside volunteers from Italy, Belgium, and Spain.",
+    when: "Aug 2025",
+  },
+];
+
 export const contact = {
   email: "edabeyter5@gmail.com",
   location: "Istanbul, Turkey",
