@@ -7,8 +7,7 @@ import { Menu, X } from "lucide-react";
 const NAV_LINKS = [
   { href: "#top", label: "Orbit" },
   { href: "#about", label: "About" },
-  { href: "#now", label: "Currently" },
-  { href: "#achievements", label: "Achievements" },
+  { href: "#now", label: "Now" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -20,9 +19,9 @@ export function SiteNav() {
       initial={{ y: -56, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="sticky top-0 z-50 border-b border-panel-tint bg-background/85 backdrop-blur-md"
+      className="sticky top-0 z-50 border-b border-surface1 bg-background/85 backdrop-blur-md"
     >
-      <div className="mx-auto flex max-w-[920px] items-center justify-between px-7 py-3.5">
+      <div className="mx-auto flex max-w-230 items-center justify-between px-7 py-3.5">
         <a href="#top" className="font-serif text-[1.05rem] font-semibold">
           Eda Beyter
         </a>
@@ -40,14 +39,14 @@ export function SiteNav() {
         <ul
           className={`${
             open ? "flex" : "hidden"
-          } absolute inset-x-0 top-full flex-col gap-4 border-b border-panel-tint bg-card px-7 py-5 shadow-lg sm:static sm:flex sm:flex-row sm:gap-6 sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none`}
+          } absolute inset-x-0 top-full flex-col gap-4 border-b border-surface1 bg-card px-7 py-5 shadow-lg sm:static sm:flex sm:flex-row sm:gap-6 sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none`}
         >
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="text-[0.86rem] font-semibold text-muted-foreground transition-colors hover:text-coral"
+                className="text-[0.86rem] font-semibold text-muted-foreground transition-colors hover:text-peach"
               >
                 {link.label}
               </a>

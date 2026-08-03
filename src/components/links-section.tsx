@@ -23,10 +23,10 @@ const ICONS = { LinkedIn: LinkedInIcon, GitHub: GitHubIcon };
 export function LinksSection() {
   return (
     <section id="links" className="py-16">
-      <div className="mx-auto max-w-[920px] px-7">
+      <div className="mx-auto max-w-230 px-7">
         <Reveal>
           <div className="mb-7 flex items-baseline gap-4">
-            <span className="whitespace-nowrap font-mono text-[0.72rem] uppercase tracking-[0.08em] text-coral">
+            <span className="whitespace-nowrap font-mono text-[0.72rem] uppercase tracking-[0.08em] text-peach">
               Bağlantılar
             </span>
             <h2 className="text-[clamp(1.5rem,3.4vw,2.1rem)] font-medium">
@@ -45,9 +45,9 @@ export function LinksSection() {
                     href={link.href}
                     target="_blank"
                     rel="noopener"
-                    className="flex items-center gap-3 rounded-[14px] bg-card px-5 py-4.5 shadow-[0_1px_2px_var(--shadow-color)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_10px_24px_var(--shadow-color)]"
+                    className="flex items-center gap-3 rounded-2xl bg-card px-5 py-4.5 shadow-[0_2px_10px_var(--shadow-color)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_14px_30px_var(--shadow-color)]"
                   >
-                    <span className="flex h-8.5 w-8.5 shrink-0 items-center justify-center rounded-full bg-panel-tint text-pool [&_svg]:h-4.5 [&_svg]:w-4.5">
+                    <span className="flex h-8.5 w-8.5 shrink-0 items-center justify-center rounded-full bg-surface1 text-mauve [&_svg]:h-4.5 [&_svg]:w-4.5">
                       <Icon />
                     </span>
                     <span>

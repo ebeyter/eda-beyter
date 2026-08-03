@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, type CSSProperties } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Globe, Rocket, TrendingUp, Waves } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -11,24 +11,16 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { orbitItems, type OrbitItem } from "@/lib/data";
-import { ParticleSphere } from "@/components/particle-sphere";
-
-const ICONS = {
-  waves: Waves,
-  "trending-up": TrendingUp,
-  globe: Globe,
-  rocket: Rocket,
-};
 
 const DECOR_ARCS = [
-  { diameter: "17rem", duration: 22, anim: "dome-ring-spin" },
-  { diameter: "27rem", duration: 32, anim: "dome-ring-spin-rev" },
-  { diameter: "37rem", duration: 44, anim: "dome-ring-spin" },
+  { diameter: "19rem", duration: 22, anim: "dome-ring-spin" },
+  { diameter: "29rem", duration: 32, anim: "dome-ring-spin-rev" },
+  { diameter: "40rem", duration: 46, anim: "dome-ring-spin" },
 ];
 
 const RING_RADIUS = {
-  1: { radius: "8.5rem", duration: 22, cw: true },
-  2: { radius: "13.5rem", duration: 32, cw: false },
+  1: { radius: "9.5rem", duration: 22, cw: true },
+  2: { radius: "15rem", duration: 34, cw: false },
 };
 
 function OrbitNode({
@@ -51,28 +43,49 @@ function OrbitNode({
     "--counter-offset": `${-item.angle}deg`,
   } as CSSProperties;
 
-  const Icon = ICONS[item.icon];
-
   return (
     <div className="absolute bottom-0 left-1/2 origin-bottom" style={spokeStyle}>
       <motion.button
         type="button"
         onClick={() => onSelect(item)}
         aria-label={`${item.label} — view details`}
-        initial={{ opacity: 0, scale: 0.4 }}
+        initial={{ opacity: 0, scale: 0.3 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay, ease: "backOut" }}
-        className="group absolute left-0 top-0 z-20 flex h-12.5 w-12.5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-ink/80 shadow-[0_4px_18px_rgba(0,0,0,0.45)] backdrop-blur-sm transition-transform duration-200 hover:scale-115 active:scale-95"
-        style={iconStyle}
+        transition={{ duration: 0.55, delay, ease: "backOut" }}
+        className="group absolute left-0 top-0 z-20 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 bg-surface0/90 text-2xl shadow-[0_6px_22px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-transform duration-200 hover:scale-115 active:scale-95 sm:h-18 sm:w-18 sm:text-3xl"
+        style={{ ...iconStyle, borderColor: item.color }}
       >
         <span
-          className="absolute inset-0 rounded-full opacity-0 blur-md transition-opacity duration-200 group-hover:opacity-70"
+          className="absolute inset-0 -z-10 rounded-full opacity-50 blur-lg transition-opacity duration-200 group-hover:opacity-90"
           style={{ backgroundColor: item.color }}
           aria-hidden
         />
-        <Icon size={20} strokeWidth={2} className="relative" style={{ color: item.color }} />
+        <span role="img" aria-hidden>
+          {item.emoji}
+        </span>
       </motion.button>
     </div>
+  );
+}
+
+function WorldLine() {
+  return (
+    <svg
+      viewBox="0 0 400 400"
+      aria-hidden
+      className="pointer-events-none absolute -left-6 top-6 h-full w-full opacity-70 sm:-left-10"
+    >
+      <path
+        d="M40 340 C 90 260, 70 160, 150 90 C 210 40, 280 60, 330 30"
+        fill="none"
+        stroke="var(--color-peach)"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeDasharray="1 9"
+        style={{ animation: "drift-line 6s ease-in-out infinite" }}
+      />
+      <circle cx="330" cy="30" r="3.5" fill="var(--color-peach)" />
+    </svg>
   );
 }
 
@@ -80,7 +93,7 @@ export function HeroOrbit() {
   const [selected, setSelected] = useState<OrbitItem | null>(null);
 
   return (
-    <div className="relative mx-auto h-72 w-full max-w-155 sm:h-88">
+    <div className="relative mx-auto h-80 w-full max-w-165 sm:h-104">
       {DECOR_ARCS.map((arc, i) => (
         <motion.div
           key={arc.diameter}
@@ -88,38 +101,55 @@ export function HeroOrbit() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.9, delay: 0.15 + i * 0.1 }}
-          className="absolute bottom-0 left-1/2 rounded-full border border-white/12"
+          className="absolute bottom-0 left-1/2 rounded-full border border-mauve/25"
           style={{ width: arc.diameter, height: arc.diameter, animation: `${arc.anim} ${arc.duration}s linear infinite` }}
         />
       ))}
 
+      <WorldLine />
+
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.1 }}
-        className="absolute inset-0 z-10"
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.1, ease: "easeOut" }}
+        className="absolute bottom-0 left-1/2 z-10 h-68 w-52 -translate-x-1/2 overflow-visible sm:h-84 sm:w-64"
       >
-        <ParticleSphere />
+        <div
+          className="relative h-full w-full"
+          style={{
+            maskImage:
+              "radial-gradient(ellipse 65% 82% at 50% 36%, black 58%, transparent 100%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 65% 82% at 50% 36%, black 58%, transparent 100%)",
+          }}
+        >
+          <Image
+            src="/eda-portrait.jpg"
+            alt="Eda Beyter"
+            fill
+            priority
+            sizes="256px"
+            className="object-cover object-top"
+          />
+          <div className="absolute inset-0 bg-mauve/12 mix-blend-color" />
+        </div>
       </motion.div>
 
       {orbitItems.map((item, i) => (
-        <OrbitNode key={item.id} item={item} onSelect={setSelected} delay={0.5 + i * 0.12} />
+        <OrbitNode key={item.id} item={item} onSelect={setSelected} delay={0.55 + i * 0.13} />
       ))}
 
       <Dialog open={!!selected} onOpenChange={(open) => !open && setSelected(null)}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="border-2 sm:max-w-md" style={{ borderColor: selected?.color }}>
           {selected && (
             <>
               <DialogHeader>
                 <div className="flex items-center gap-2.5">
                   <span
-                    className="flex h-9 w-9 items-center justify-center rounded-full"
-                    style={{ backgroundColor: `color-mix(in srgb, ${selected.color} 18%, transparent)` }}
+                    className="flex h-10 w-10 items-center justify-center rounded-full text-xl"
+                    style={{ backgroundColor: `color-mix(in srgb, ${selected.color} 22%, transparent)` }}
                   >
-                    {(() => {
-                      const Icon = ICONS[selected.icon];
-                      return <Icon size={18} style={{ color: selected.color }} />;
-                    })()}
+                    {selected.emoji}
                   </span>
                   <DialogTitle className="text-lg">{selected.label}</DialogTitle>
                 </div>
@@ -132,7 +162,7 @@ export function HeroOrbit() {
                 ))}
               </ul>
 
-              <div className="rounded-lg border border-dashed border-rope bg-panel-tint px-3.5 py-3 text-center text-xs text-muted-foreground">
+              <div className="rounded-lg border border-dashed border-surface2 bg-surface1 px-3.5 py-3 text-center text-xs text-muted-foreground">
                 Photos coming soon
               </div>
             </>
