@@ -1,0 +1,54 @@
+"use client";
+
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+
+const NAV_LINKS = [
+  { href: "#about", label: "About" },
+  { href: "#now", label: "Currently" },
+  { href: "#achievements", label: "Achievements" },
+  { href: "#feature", label: "Orbit" },
+  { href: "#contact", label: "Contact" },
+];
+
+export function SiteNav() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <nav className="sticky top-0 z-50 border-b border-panel-tint bg-background/85 backdrop-blur-md">
+      <div className="mx-auto flex max-w-[920px] items-center justify-between px-7 py-3.5">
+        <a href="#top" className="font-serif text-[1.05rem] font-semibold">
+          Eda Beyter
+        </a>
+
+        <button
+          type="button"
+          aria-label="Toggle menu"
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+          className="p-1 text-foreground sm:hidden"
+        >
+          {open ? <X size={22} /> : <Menu size={22} />}
+        </button>
+
+        <ul
+          className={`${
+            open ? "flex" : "hidden"
+          } absolute inset-x-0 top-full flex-col gap-4 border-b border-panel-tint bg-card px-7 py-5 shadow-lg sm:static sm:flex sm:flex-row sm:gap-6 sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none`}
+        >
+          {NAV_LINKS.map((link) => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="text-[0.86rem] font-semibold text-muted-foreground transition-colors hover:text-coral"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+  );
+}

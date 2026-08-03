@@ -12,23 +12,33 @@ center under "Currently"; finished achievements (swim titles, TEDx, HSBC)
 sit in a quieter "Achievements" list below, present but not competing for
 attention.
 
-The personal feature is a set of orbiting rings around a center "EB" mark,
-each node representing one of the four things running in parallel in her
-life right now (swimming, Model UN, building, investing) — built with plain
-CSS animations, no external dependencies.
+The centerpiece is an interactive "orbit" feature: a center "EB" mark
+representing her, with four things running in parallel in her life —
+swimming, Model UN, building, investing — orbiting around it. Tapping a
+lane opens its details.
 
 ## Stack
 
-Plain HTML/CSS/JS, no build step. Deploys as a static site.
+Next.js (App Router) + TypeScript + Tailwind CSS v4 + shadcn/ui, with
+framer-motion for scroll reveals and the orbit interactions. Deploys as a
+standard Next.js app on Vercel.
 
 ## Local development
 
-Open `index.html` directly, or serve it:
+```
+npm install
+npm run dev
+```
+
+## Adding shadcn components
 
 ```
-npx serve .
+npx shadcn@latest add <component>
 ```
+
+Components land in `src/components/ui` (the shadcn convention) — keep new
+ones there so the CLI can find and upgrade them later.
 
 ## Deployment
 
-Deployed on Vercel as a static site (no framework preset needed).
+Deployed on Vercel, linked via the existing `eda-beyter` project.
