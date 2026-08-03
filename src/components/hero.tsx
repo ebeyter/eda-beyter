@@ -133,14 +133,15 @@ export function Hero() {
           href="#orbit"
           variants={fadeUp}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          whileHover={{ y: -3 }}
           whileTap={{ scale: 0.96 }}
-          className="mt-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue via-pink to-mauve px-7 py-3.5 text-[1.05rem] font-bold text-crust shadow-[0_10px_30px_rgba(203,166,247,0.35)]"
+          className="group mt-4 inline-flex items-center gap-2 rounded-full border-2 border-mauve bg-transparent px-7 py-3.5 text-[1.05rem] font-bold text-mauve transition-all duration-300 hover:border-transparent hover:bg-gradient-to-r hover:from-blue hover:via-pink hover:to-mauve hover:text-crust hover:shadow-[0_10px_30px_rgba(203,166,247,0.35)]"
         >
           To discover more, click here
           <motion.span
             aria-hidden
+            className="inline-block"
             animate={{ y: [0, 5, 0] }}
+            whileHover={{ x: 4 }}
             transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
           >
             ↓

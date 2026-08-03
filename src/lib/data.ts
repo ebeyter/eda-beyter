@@ -23,7 +23,7 @@ export const orbitItems: OrbitItem[] = [
     iconType: "emoji",
     icon: "🌍",
     arc: "inner",
-    angle: -60,
+    angle: 0,
     dialog: {
       tagline: "Model UN is where I learned to keep a hundred moving parts calm at once.",
       bullets: [
@@ -40,7 +40,7 @@ export const orbitItems: OrbitItem[] = [
     iconType: "image",
     icon: "/fenerbahce-logo.png",
     arc: "inner",
-    angle: 0,
+    angle: 120,
     dialog: {
       tagline: "Swimming's been my thing since I was little — early mornings, endless laps, still going.",
       bullets: [
@@ -57,7 +57,7 @@ export const orbitItems: OrbitItem[] = [
     iconType: "emoji",
     icon: "🎓",
     arc: "inner",
-    angle: 60,
+    angle: 240,
     dialog: {
       tagline: "School's more than classes for me — I hosted TEDx and lead the Honors Council this year.",
       bullets: [
@@ -74,7 +74,7 @@ export const orbitItems: OrbitItem[] = [
     iconType: "image",
     icon: "/entrepreneurship-logo.png",
     arc: "outer",
-    angle: -90,
+    angle: 45,
     dialog: {
       tagline: "President of the Saint Joseph Entrepreneurship Club since Sep 2024 — building things with people is my favorite kind of chaos.",
       bullets: [
@@ -91,7 +91,7 @@ export const orbitItems: OrbitItem[] = [
     iconType: "emoji",
     icon: "🌱",
     arc: "outer",
-    angle: -30,
+    angle: 135,
     dialog: {
       tagline: "I like being around people building things, on and off campus.",
       bullets: [
@@ -107,7 +107,7 @@ export const orbitItems: OrbitItem[] = [
     iconType: "emoji",
     icon: "📈",
     arc: "outer",
-    angle: 30,
+    angle: 225,
     dialog: {
       tagline: "I like keeping an eye on markets and how the economy actually works.",
       bullets: [
@@ -123,7 +123,7 @@ export const orbitItems: OrbitItem[] = [
     iconType: "emoji",
     icon: "🍽️",
     arc: "outer",
-    angle: 90,
+    angle: 315,
     dialog: {
       tagline: "Outside of everything else: I love to eat, and I'll play pretty much any sport you put in front of me.",
       bullets: [
