@@ -15,14 +15,14 @@ import { SectionGlow } from "@/components/section-glow";
 
 const RINGS = {
   inner: {
-    ringClass: "h-44 w-44 sm:h-68 sm:w-68",
-    radiusClass: "[--radius:5.5rem] sm:[--radius:8.5rem]",
+    ringClass: "h-[min(46vw,11rem)] w-[min(46vw,11rem)] sm:h-68 sm:w-68",
+    radiusClass: "[--radius:min(23vw,5.5rem)] sm:[--radius:8.5rem]",
     duration: 26,
     cw: true,
   },
   outer: {
-    ringClass: "h-76 w-76 sm:h-116 sm:w-116",
-    radiusClass: "[--radius:9.5rem] sm:[--radius:14.5rem]",
+    ringClass: "h-[min(78vw,19rem)] w-[min(78vw,19rem)] sm:h-116 sm:w-116",
+    radiusClass: "[--radius:min(39vw,9.5rem)] sm:[--radius:14.5rem]",
     duration: 38,
     cw: false,
   },
@@ -84,7 +84,7 @@ function OrbitNode({
         />
         <OrbitIcon item={item} />
       </motion.button>
-      <span className="pointer-events-none absolute left-0 top-[1.6rem] -translate-x-1/2 whitespace-nowrap text-[0.56rem] font-bold italic uppercase tracking-wide text-subtext0 sm:top-[2.2rem] sm:text-[0.68rem]">
+      <span className="pointer-events-none absolute left-0 top-[1.6rem] -translate-x-1/2 whitespace-nowrap font-serif text-[0.62rem] font-semibold uppercase tracking-[0.05em] text-subtext1 sm:top-[2.2rem] sm:text-[0.76rem]">
         {item.label}
       </span>
     </div>
@@ -131,8 +131,8 @@ export function OrbitPage() {
     >
       <SectionGlow variant="b" />
 
-      <div className="fixed inset-x-0 top-4 z-40 flex h-11 items-center justify-center px-20 sm:top-6">
-        <h2 className="max-w-[34ch] truncate bg-gradient-to-r from-blue via-pink to-mauve bg-clip-text text-center text-[0.8rem] font-serif font-bold text-transparent sm:text-[0.95rem]">
+      <div className="absolute inset-x-0 top-4 z-10 flex justify-center px-16 sm:top-6">
+        <h2 className="max-w-[20ch] bg-gradient-to-r from-blue via-pink to-mauve bg-clip-text text-center text-[0.8rem] font-serif font-bold text-transparent sm:max-w-[34ch] sm:text-[0.95rem]">
           Click the icons to get to know me better
         </h2>
       </div>
