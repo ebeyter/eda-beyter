@@ -3,11 +3,12 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Loader2, Mic, Send, Volume2, VolumeX, X } from "lucide-react";
+import { PandaIcon } from "@/components/panda-icon";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
 const WELCOME_MESSAGE =
-  "Hi, I'm Pandi 🐼 — Eda's assistant. Ask me about her projects, interests, achievements, or goals. You can type, or tap the mic and just talk to me.";
+  "Hi, I'm Pandi — Eda's assistant. Ask me about her projects, interests, achievements, or goals. You can type, or tap the mic and just talk to me.";
 
 const SUGGESTED_QUESTIONS = [
   "What's her biggest achievement?",
@@ -43,8 +44,8 @@ export function Chatbot() {
   const [error, setError] = useState<string | null>(null);
   const [listening, setListening] = useState(false);
   const [speakEnabled, setSpeakEnabled] = useState(false);
-  const [support, setSupport] = useState({ voice: false, speech: false });
-  const { voice: voiceSupported, speech: speechSupported } = support;
+  const [support, setSupport] = useState({ voice: false, speech: false, reducedMotion: false });
+  const { voice: voiceSupported, speech: speechSupported, reducedMotion } = support;
 
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -67,6 +68,7 @@ export function Chatbot() {
     setSupport({
       voice: !!(w.SpeechRecognition || w.webkitSpeechRecognition),
       speech: "speechSynthesis" in window,
+      reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     });
   }, []);
 
@@ -143,15 +145,39 @@ export function Chatbot() {
 
   return (
     <>
+      <AnimatePresence>
+        {!open && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{
+              opacity: 1,
+              y: reducedMotion ? 0 : [0, -5, 0],
+            }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{
+              opacity: { duration: 0.4, delay: 1 },
+              y: reducedMotion
+                ? { duration: 0 }
+                : { duration: 2.4, repeat: Infinity, ease: "easeInOut", delay: 1.4 },
+            }}
+            className="fixed bottom-20 right-4 z-50 sm:bottom-24 sm:right-6"
+          >
+            <span className="whitespace-nowrap rounded-full border border-surface1 bg-surface0/90 px-4 py-2 text-[0.86rem] font-semibold text-subtext1 shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur-md">
+              Ask me a question
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <motion.button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Close chat" : "Chat with Pandi about Eda"}
         aria-expanded={open}
         whileTap={{ scale: 0.92 }}
-        className="fixed bottom-4 right-4 z-50 flex h-13 w-13 items-center justify-center rounded-full border border-surface1 bg-surface0/90 text-xl shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur-md transition-colors hover:bg-surface1 sm:bottom-6 sm:right-6"
+        className="fixed bottom-4 right-4 z-50 flex h-13 w-13 items-center justify-center rounded-full border border-surface1 bg-surface0/90 shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur-md transition-colors hover:bg-surface1 sm:bottom-6 sm:right-6"
       >
-        {open ? <X size={20} className="text-mauve" /> : <span role="img" aria-hidden>🐼</span>}
+        {open ? <X size={20} className="text-mauve" /> : <PandaIcon size={28} />}
       </motion.button>
 
       <AnimatePresence>
@@ -167,7 +193,7 @@ export function Chatbot() {
           >
             <div className="flex items-center justify-between border-b border-surface1 px-4 py-3">
               <span className="flex items-center gap-2 text-[0.9rem] font-bold text-foreground">
-                <span role="img" aria-hidden>🐼</span>
+                <PandaIcon size={20} />
                 Pandi
               </span>
               <div className="flex items-center gap-1">
@@ -281,8 +307,8 @@ function ChatBubble({ role, content }: ChatMessage) {
   return (
     <div className={`flex items-end gap-1.5 ${isUser ? "justify-end" : "justify-start"}`}>
       {!isUser && (
-        <span className="mb-0.5 flex h-5 w-5 shrink-0 items-center justify-center text-sm" aria-hidden>
-          🐼
+        <span className="mb-0.5 flex h-5 w-5 shrink-0 items-center justify-center">
+          <PandaIcon size={18} />
         </span>
       )}
       <p
