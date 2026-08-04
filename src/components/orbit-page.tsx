@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { orbitItems, type OrbitItem } from "@/lib/data";
 import { SectionGlow } from "@/components/section-glow";
+import { Starfield } from "@/components/starfield";
 
 const RINGS = {
   inner: {
@@ -78,7 +79,9 @@ function OrbitNode({
         style={{ borderColor: item.color }}
       >
         <span
-          className="absolute inset-0 -z-10 rounded-full opacity-50 blur-lg transition-opacity duration-200 group-hover:opacity-90"
+          className={`absolute inset-0 -z-10 rounded-full blur-lg transition-opacity duration-200 group-hover:opacity-90 ${
+            item.arc === "inner" ? "opacity-60" : "opacity-35"
+          }`}
           style={{ backgroundColor: item.color }}
           aria-hidden
         />
@@ -96,7 +99,8 @@ function DecorRing({ ring }: { ring: "inner" | "outer" }) {
   return (
     <div
       aria-hidden
-      className={`pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-mauve/20 ${config.ringClass}`}
+      className={`pointer-events-none absolute left-1/2 top-1/2 rounded-full border border-mauve/25 shadow-[0_0_18px_rgba(203,166,247,0.08)] ${config.ringClass}`}
+      style={{ transform: "translate(-50%, -50%) scaleY(0.82)" }}
     />
   );
 }
@@ -130,9 +134,10 @@ export function OrbitPage() {
       className="snap-page relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-crust px-2 py-8"
     >
       <SectionGlow variant="b" />
+      <Starfield />
 
-      <div className="absolute inset-x-0 top-4 z-10 flex justify-center px-16 sm:top-6">
-        <h2 className="max-w-[20ch] bg-gradient-to-r from-blue via-pink to-mauve bg-clip-text text-center text-[0.8rem] font-serif font-bold text-transparent sm:max-w-[34ch] sm:text-[0.95rem]">
+      <div className="absolute inset-x-0 top-4 z-10 flex h-11 items-center justify-center px-6 sm:top-6">
+        <h2 className="whitespace-nowrap bg-gradient-to-r from-blue via-pink to-mauve bg-clip-text text-center text-[clamp(0.72rem,3.3vw,1.25rem)] font-serif font-bold text-transparent">
           Click the icons to get to know me better
         </h2>
       </div>
