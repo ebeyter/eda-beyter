@@ -30,6 +30,8 @@ const RINGS = {
 };
 
 const ICON_SIZE = "h-10 w-10 sm:h-14 sm:w-14";
+const ELLIPSE_Y = 0.82;
+const ELLIPSE_Y_INVERSE = 1 / ELLIPSE_Y;
 
 function OrbitIcon({ item }: { item: OrbitItem }) {
   if (item.iconType === "image") {
@@ -60,36 +62,43 @@ function OrbitNode({
 
   return (
     <div
-      className={`pointer-events-none absolute left-1/2 top-1/2 h-0 w-0 ${ring.radiusClass}`}
-      style={
-        {
-          animation: `${anim} ${ring.duration}s linear infinite`,
-          "--start-angle": `${item.angle}deg`,
-        } as CSSProperties
-      }
+      className="pointer-events-none absolute left-1/2 top-1/2 h-0 w-0"
+      style={{ transform: `scaleY(${ELLIPSE_Y})` }}
     >
-      <motion.button
-        type="button"
-        onClick={() => onSelect(item)}
-        aria-label={`${item.label} — view details`}
-        initial={{ opacity: 0, scale: 0.3 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay, ease: "backOut" }}
-        className={`${ICON_SIZE} group pointer-events-auto absolute left-0 top-0 z-10 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border-2 bg-surface0/90 shadow-[0_6px_22px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-transform duration-200 hover:scale-115 active:scale-95`}
-        style={{ borderColor: item.color }}
+      <div
+        className={`h-0 w-0 ${ring.radiusClass}`}
+        style={
+          {
+            animation: `${anim} ${ring.duration}s linear infinite`,
+            "--start-angle": `${item.angle}deg`,
+          } as CSSProperties
+        }
       >
-        <span
-          className={`absolute inset-0 -z-10 rounded-full blur-lg transition-opacity duration-200 group-hover:opacity-90 ${
-            item.arc === "inner" ? "opacity-60" : "opacity-35"
-          }`}
-          style={{ backgroundColor: item.color }}
-          aria-hidden
-        />
-        <OrbitIcon item={item} />
-      </motion.button>
-      <span className="pointer-events-none absolute left-0 top-[1.6rem] -translate-x-1/2 whitespace-nowrap font-serif text-[0.62rem] font-semibold uppercase tracking-[0.05em] text-subtext1 sm:top-[2.2rem] sm:text-[0.76rem]">
-        {item.label}
-      </span>
+        <div className="absolute left-0 top-0" style={{ transform: `scaleY(${ELLIPSE_Y_INVERSE})` }}>
+          <motion.button
+            type="button"
+            onClick={() => onSelect(item)}
+            aria-label={`${item.label} — view details`}
+            initial={{ opacity: 0, scale: 0.3 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay, ease: "backOut" }}
+            className={`${ICON_SIZE} group pointer-events-auto absolute left-0 top-0 z-10 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border-2 bg-surface0/90 shadow-[0_6px_22px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-transform duration-200 hover:scale-115 active:scale-95`}
+            style={{ borderColor: item.color }}
+          >
+            <span
+              className={`absolute inset-0 -z-10 rounded-full blur-lg transition-opacity duration-200 group-hover:opacity-90 ${
+                item.arc === "inner" ? "opacity-60" : "opacity-35"
+              }`}
+              style={{ backgroundColor: item.color }}
+              aria-hidden
+            />
+            <OrbitIcon item={item} />
+          </motion.button>
+          <span className="pointer-events-none absolute left-0 top-[1.6rem] -translate-x-1/2 whitespace-nowrap font-serif text-[0.62rem] font-semibold uppercase tracking-[0.05em] text-subtext1 sm:top-[2.2rem] sm:text-[0.76rem]">
+            {item.label}
+          </span>
+        </div>
+      </div>
     </div>
   );
 }
@@ -100,7 +109,7 @@ function DecorRing({ ring }: { ring: "inner" | "outer" }) {
     <div
       aria-hidden
       className={`pointer-events-none absolute left-1/2 top-1/2 rounded-full border border-mauve/25 shadow-[0_0_18px_rgba(203,166,247,0.08)] ${config.ringClass}`}
-      style={{ transform: "translate(-50%, -50%) scaleY(0.82)" }}
+      style={{ transform: `translate(-50%, -50%) scaleY(${ELLIPSE_Y})` }}
     />
   );
 }
