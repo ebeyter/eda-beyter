@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Loader2, Mic, Send, Volume2, VolumeX, X } from "lucide-react";
+import { ArrowRight, Loader2, Mic, Send, Volume2, VolumeX, X } from "lucide-react";
 import { PandaIcon } from "@/components/panda-icon";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
@@ -44,17 +44,30 @@ export function Chatbot() {
   const [error, setError] = useState<string | null>(null);
   const [listening, setListening] = useState(false);
   const [speakEnabled, setSpeakEnabled] = useState(false);
-  const [support, setSupport] = useState({ voice: false, speech: false, reducedMotion: false });
-  const { voice: voiceSupported, speech: speechSupported, reducedMotion } = support;
+  const [support, setSupport] = useState({ voice: false, speech: false });
+  const { voice: voiceSupported, speech: speechSupported } = support;
 
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
   const spokenCountRef = useRef(0);
 
+  const [onHeroPage, setOnHeroPage] = useState(true);
+
   useEffect(() => {
     if (open) inputRef.current?.focus();
   }, [open]);
+
+  useEffect(() => {
+    const target = document.getElementById("top");
+    if (!target) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setOnHeroPage(entry.intersectionRatio > 0.5),
+      { threshold: [0, 0.5, 1] }
+    );
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -68,7 +81,6 @@ export function Chatbot() {
     setSupport({
       voice: !!(w.SpeechRecognition || w.webkitSpeechRecognition),
       speech: "speechSynthesis" in window,
-      reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     });
   }, []);
 
@@ -145,40 +157,36 @@ export function Chatbot() {
 
   return (
     <>
-      <AnimatePresence>
-        {!open && (
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{
-              opacity: 1,
-              y: reducedMotion ? 0 : [0, -5, 0],
-            }}
-            exit={{ opacity: 0, y: 8 }}
-            transition={{
-              opacity: { duration: 0.4, delay: 1 },
-              y: reducedMotion
-                ? { duration: 0 }
-                : { duration: 2.4, repeat: Infinity, ease: "easeInOut", delay: 1.4 },
-            }}
-            className="fixed bottom-20 right-4 z-50 sm:bottom-24 sm:right-6"
-          >
-            <span className="whitespace-nowrap rounded-full border border-surface1 bg-surface0/90 px-4 py-2 text-[0.86rem] font-semibold text-subtext1 shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur-md">
+      <div className="fixed bottom-4 right-4 z-50 flex items-center gap-2 sm:bottom-6 sm:right-6">
+        <AnimatePresence>
+          {!open && !onHeroPage && (
+            <motion.button
+              type="button"
+              onClick={() => setOpen(true)}
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 10 }}
+              transition={{ duration: 0.35, delay: 0.5, ease: "easeOut" }}
+              aria-label="Chat with Pandi about Eda"
+              className="group flex items-center gap-2 whitespace-nowrap rounded-full border-2 border-mauve bg-crust/80 px-4 py-2 text-[0.86rem] font-bold text-mauve shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur-md transition-all duration-300 hover:border-transparent hover:bg-gradient-to-r hover:from-blue hover:via-pink hover:to-mauve hover:text-crust hover:shadow-[0_10px_30px_rgba(203,166,247,0.35)]"
+            >
               Ask me a question
-            </span>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />
+            </motion.button>
+          )}
+        </AnimatePresence>
 
-      <motion.button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-label={open ? "Close chat" : "Chat with Pandi about Eda"}
-        aria-expanded={open}
-        whileTap={{ scale: 0.92 }}
-        className="fixed bottom-4 right-4 z-50 flex h-13 w-13 items-center justify-center rounded-full border border-surface1 bg-surface0/90 shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur-md transition-colors hover:bg-surface1 sm:bottom-6 sm:right-6"
-      >
-        {open ? <X size={20} className="text-mauve" /> : <PandaIcon size={28} />}
-      </motion.button>
+        <motion.button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "Close chat" : "Chat with Pandi about Eda"}
+          aria-expanded={open}
+          whileTap={{ scale: 0.92 }}
+          className="group flex h-13 w-13 shrink-0 items-center justify-center rounded-full border-2 border-mauve bg-crust/80 shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur-md transition-all duration-300 hover:bg-surface0/90 hover:shadow-[0_10px_30px_rgba(203,166,247,0.35)]"
+        >
+          {open ? <X size={20} className="text-mauve" /> : <PandaIcon size={28} />}
+        </motion.button>
+      </div>
 
       <AnimatePresence>
         {open && (
@@ -189,9 +197,15 @@ export function Chatbot() {
             transition={{ duration: 0.2, ease: "easeOut" }}
             role="dialog"
             aria-label="Chat with Pandi about Eda"
-            className="fixed inset-x-3 bottom-20 top-20 z-50 flex flex-col overflow-hidden rounded-2xl border border-surface1 bg-surface0/95 shadow-[0_20px_60px_rgba(0,0,0,0.55)] backdrop-blur-md sm:inset-x-auto sm:top-auto sm:bottom-24 sm:right-6 sm:h-[32rem] sm:w-96"
+            className="fixed inset-x-3 bottom-20 top-20 z-50 flex flex-col overflow-hidden rounded-2xl border border-white/15 bg-surface0/95 shadow-[0_20px_60px_rgba(0,0,0,0.55)] backdrop-blur-xl sm:inset-x-auto sm:top-auto sm:bottom-24 sm:right-6 sm:h-[32rem] sm:w-96"
           >
-            <div className="flex items-center justify-between border-b border-surface1 px-4 py-3">
+            <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+              <div className="absolute -top-12 -left-10 h-40 w-40 rounded-full bg-mauve/45 blur-3xl" />
+              <div className="absolute -bottom-16 -right-10 h-48 w-48 rounded-full bg-blue/40 blur-3xl" />
+              <div className="absolute right-1/4 top-1/3 h-32 w-32 rounded-full bg-pink/30 blur-3xl" />
+            </div>
+
+            <div className="relative flex items-center justify-between border-b border-white/10 px-4 py-3">
               <span className="flex items-center gap-2 text-[0.9rem] font-bold text-foreground">
                 <PandaIcon size={20} />
                 Pandi
@@ -224,7 +238,7 @@ export function Chatbot() {
               </div>
             </div>
 
-            <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-3">
+            <div ref={scrollRef} className="relative flex-1 space-y-3 overflow-y-auto px-4 py-3">
               <ChatBubble role="assistant" content={WELCOME_MESSAGE} />
               {messages.map((m, i) => (
                 <ChatBubble key={i} role={m.role} content={m.content} />
@@ -237,7 +251,7 @@ export function Chatbot() {
                       key={q}
                       type="button"
                       onClick={() => sendMessage(q)}
-                      className="rounded-full border border-surface1 bg-surface1/50 px-3 py-1.5 text-[0.78rem] text-subtext1 transition-colors hover:border-mauve hover:text-mauve"
+                      className="rounded-full border border-white/10 bg-surface0/80 px-3 py-1.5 text-[0.8rem] text-subtext1 transition-colors hover:border-mauve hover:text-mauve"
                     >
                       {q}
                     </button>
@@ -259,7 +273,7 @@ export function Chatbot() {
               )}
             </div>
 
-            <form onSubmit={handleSubmit} className="flex items-center gap-2 border-t border-surface1 p-3">
+            <form onSubmit={handleSubmit} className="flex items-center gap-2 border-t border-white/10 bg-surface0/30 p-3">
               {voiceSupported && (
                 <button
                   type="button"
@@ -270,7 +284,7 @@ export function Chatbot() {
                   className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors disabled:opacity-50 ${
                     listening
                       ? "animate-pulse border-red bg-red/15 text-red"
-                      : "border-surface1 bg-surface0/60 text-subtext1 hover:text-mauve"
+                      : "border-white/10 bg-surface0/80 text-subtext1 hover:text-mauve"
                   }`}
                 >
                   <Mic size={15} />
@@ -284,7 +298,7 @@ export function Chatbot() {
                 placeholder={listening ? "Listening…" : "Ask a question…"}
                 aria-label="Your question"
                 disabled={loading}
-                className="w-full rounded-full border border-surface1 bg-surface0/60 px-3.5 py-2 text-[0.85rem] text-foreground outline-none focus:outline-2 focus:outline-mauve focus:outline-offset-1 disabled:opacity-60"
+                className="w-full rounded-full border border-white/10 bg-surface0/80 px-3.5 py-2 text-[0.88rem] text-foreground outline-none focus:outline-2 focus:outline-mauve focus:outline-offset-1 disabled:opacity-60"
               />
               <button
                 type="submit"
@@ -312,10 +326,10 @@ function ChatBubble({ role, content }: ChatMessage) {
         </span>
       )}
       <p
-        className={`max-w-[80%] whitespace-pre-wrap rounded-2xl px-3.5 py-2 text-[0.85rem] leading-snug ${
+        className={`max-w-[80%] whitespace-pre-wrap rounded-2xl px-3.5 py-2 text-[0.88rem] leading-relaxed ${
           isUser
-            ? "bg-gradient-to-r from-pink to-mauve text-crust"
-            : "bg-surface1 text-foreground"
+            ? "bg-gradient-to-r from-pink to-mauve font-medium text-crust"
+            : "bg-surface0/90 text-foreground shadow-[0_2px_10px_rgba(0,0,0,0.25)]"
         }`}
       >
         {content}

@@ -29,7 +29,7 @@ const RINGS = {
   },
 };
 
-const ICON_SIZE = "h-10 w-10 sm:h-14 sm:w-14";
+const ICON_SIZE = "h-[min(8.5vw,2.5rem)] w-[min(8.5vw,2.5rem)] sm:h-14 sm:w-14";
 const ELLIPSE_Y = 0.82;
 const ELLIPSE_Y_INVERSE = 1 / ELLIPSE_Y;
 
@@ -94,7 +94,7 @@ function OrbitNode({
             />
             <OrbitIcon item={item} />
           </motion.button>
-          <span className="pointer-events-none absolute left-0 top-[1.6rem] -translate-x-1/2 whitespace-nowrap font-serif text-[0.62rem] font-semibold uppercase tracking-[0.05em] text-subtext1 sm:top-[2.2rem] sm:text-[0.76rem]">
+          <span className="pointer-events-none absolute left-0 top-[min(6.5vw,1.6rem)] -translate-x-1/2 whitespace-nowrap font-serif text-[min(2.4vw,0.62rem)] font-semibold uppercase tracking-[0.03em] text-subtext1 sm:top-[2.2rem] sm:text-[0.76rem] sm:tracking-[0.05em]">
             {item.label}
           </span>
         </div>
